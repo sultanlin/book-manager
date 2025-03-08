@@ -1,0 +1,98 @@
+/* e4101f2e6998daa0e140f1286547853e315d8cd95fc3b8e9 */
+/*  
+curl -XPOST http://localhost:2468/api/webhook?apikey=e4101f2e6998daa0e140f1286547853e315d8cd95fc3b8e9 --data-urlencode "infoHash=%I"
+*/
+/* @font-face {
+  font-family: system-ui;
+  font-style: normal;
+  font-weight: 300;
+  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+} */
+
+/*
+Josh's Custom CSS Reset
+https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  /* =10px */
+  /* Use rems for all font sizes */
+  font-size: 62.5%;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+:root {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+}
+
+body {
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+/* prettier-ignore */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  max-inline-size: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+/* prettier-ignore */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+/* prettier-ignore */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+/* prettier-ignore */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* 9. Create a root stacking context */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1.4rem;
+} /* =14px */
+h1 {
+  font-size: 2.4rem;
+} /* =24px */
+
+html {
+  --color-1: red;
+  --color-2: blue;
+
+  --bg: linear-gradient(to right, var(--color-1), var(--color-2));
+}
+/* div { background: var(--bg); */
+/* } */
+/* .variation { */
+/*   --color-1: green; */
+/* } */

@@ -1,5 +1,6 @@
 .direnv/
 .git-bak/
+library.zip
 
 HELP.md
 target/
