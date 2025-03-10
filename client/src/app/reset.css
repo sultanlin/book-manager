@@ -39,6 +39,11 @@ html {
 body {
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+
+  /* TODO: React defaults */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* 5. Improve media defaults */
@@ -80,6 +85,11 @@ body {
   font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1.4rem;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 } /* =14px */
 h1 {
   font-size: 2.4rem;

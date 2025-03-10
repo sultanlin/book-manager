@@ -1,0 +1,30 @@
+@import "reset.css";
+
+.cover {
+  width: 14rem;
+  /* object-fit: cover; */
+}
+
+.grid.container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar content";
+  grid-template-columns: 1fr 12fr;
+}
+
+.header {
+  grid-area: header;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.content {
+  grid-area: content;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
