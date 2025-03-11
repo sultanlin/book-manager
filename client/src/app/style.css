@@ -2,6 +2,7 @@
 
 .grid.container {
   display: grid;
+  height: 100vh;
   grid-template-areas:
     "header header"
     "sidebar content";
@@ -26,5 +27,13 @@
 
 .content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  padding: 1rem 4rem;
+  gap: 2rem;
+  background-color: grey;
+  overflow-y: scroll;
+}
+
+.book {
+  background-color: white;
 }
