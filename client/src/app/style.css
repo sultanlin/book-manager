@@ -83,6 +83,10 @@
   margin-right: 4rem;
 }
 
+.usercard .icon {
+  font-size: 3rem;
+}
+
 .search {
   display: flex;
   align-items: center;

@@ -2,8 +2,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 function UserCard() {
   return (
     <div className="usercard">
-      <h3>Sultan</h3>
-      <AccountCircleIcon />
+      <h3>username</h3>
+      <AccountCircleIcon className="icon" />
     </div>
   )
 }
