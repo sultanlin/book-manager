@@ -4,15 +4,32 @@ import SidebarButton from "./SidebarButton"
 function Sidebar() {
   // TODO: Add a burger to minimize navbar, like in youtube
   // Make each setting/button into its own component
+  // Add ID for each "collection" and use it as key
+  // Max 5 custom shelfs
+
+  const collections = ["Next", "Soon", "Borrowed", "ASAP"]
   return (
-    <div className="sidebar">
-      <p className="icon">icon here</p>
-      <p>All Books</p>
-      <p className="icon">icon here</p>
-      <p>Saved Books</p>
-      <p className="icon">icon here</p>
-      <p>Settings</p>
-    </div>
+    <nav role="toolbar" className="sidebar">
+      <SidebarButton isCurrent={true} href="">
+        <HomeIcon color="primary" fontSize="large" />
+        <h2>All Books</h2>
+      </SidebarButton>
+      <SidebarButton href="">
+        <HomeIcon color="primary" fontSize="large" />
+        <h2>Your Books</h2>
+      </SidebarButton>
+      {collections.map((c) => (
+        <SidebarButton href="">
+          <HomeIcon color="primary" fontSize="large" />
+          <h2>{c}</h2>
+        </SidebarButton>
+      ))}
+      <SidebarButton href="">
+        {/* TODO: Plus Icon */}
+        <AddIcon color="primary" fontSize="large" />
+        <h2>Add Shelf</h2>
+      </SidebarButton>
+    </nav>
   )
 }
 

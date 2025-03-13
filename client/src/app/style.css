@@ -37,3 +37,30 @@
 .book {
   background-color: white;
 }
+
+.sidebar {
+  background-color: lightgray;
+}
+
+.sidebar .button {
+  display: block;
+  padding: 1.2rem 2rem;
+  color: red;
+  text-align: center;
+  text-decoration: none;
+  font-style: none;
+}
+
+.sidebar .button:first-of-type {
+  padding-top: 2rem;
+}
+
+.sidebar .current {
+  border-left: green 0.5rem solid;
+  background-color: lightgray;
+}
+
+.sidebar h2 {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
