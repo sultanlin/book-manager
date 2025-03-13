@@ -1,13 +1,13 @@
 import Logo from "./Logo"
 import Search from "./Search"
-import User from "./User"
+import UserCard from "./UserCard"
 
 function Header() {
   return (
     <header className="header">
       <Logo />
       <Search />
-      <User />
+      <UserCard />
     </header>
   )
 }
