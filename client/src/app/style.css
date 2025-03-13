@@ -82,3 +82,28 @@
   align-items: center;
   margin-right: 4rem;
 }
+
+.search {
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  border: 1px darkgray solid;
+  width: 25rem;
+}
+
+.search input {
+  background-color: transparent;
+  border: none;
+  flex: 1;
+  padding: 0.6rem;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search .icon {
+  color: red;
+  padding: 10;
+  margin-right: 0.3rem;
+}
