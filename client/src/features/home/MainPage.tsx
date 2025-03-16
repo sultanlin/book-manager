@@ -1,6 +1,6 @@
+import BooksDisplay from "./BooksDisplay"
 import Header from "./Header"
 import Sidebar from "./Sidebar"
-import Showcase from "./Showcase"
 
 function MainPage() {
   {
@@ -11,7 +11,7 @@ function MainPage() {
     <div className="container grid">
       <Header />
       <Sidebar />
-      <Showcase />
+      <BooksDisplay />
     </div>
   )
 }

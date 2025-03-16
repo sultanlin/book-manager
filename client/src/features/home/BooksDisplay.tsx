@@ -3,7 +3,7 @@ import BookProps from "../../types/BookProps"
 import { ReactNode } from "react"
 import img from "../../assets/cover.jpg"
 
-function Showcase(): ReactNode {
+function BooksDisplay(): ReactNode {
   // TODO: Layout is ruined with only 1 book
   const books: BookProps[] = [
     { name: "first book", cover: img, author: "J.K. 1" },
@@ -36,4 +36,4 @@ function Showcase(): ReactNode {
   )
 }
 
-export default Showcase
+export default BooksDisplay
