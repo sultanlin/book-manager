@@ -28,8 +28,9 @@
 
 .content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  padding: 1rem 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  padding: 1rem;
+  grid-auto-rows: max-content;
   gap: 2rem;
   background-color: grey;
   overflow: auto;
