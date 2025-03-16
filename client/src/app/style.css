@@ -6,7 +6,8 @@
   grid-template-areas:
     "header header"
     "sidebar content";
-  grid-template-columns: 1fr 12fr;
+  grid-template-columns: 1fr 18fr;
+  grid-template-rows: 8vh 1fr;
 }
 
 .header {
