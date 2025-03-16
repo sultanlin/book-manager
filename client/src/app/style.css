@@ -6,8 +6,7 @@
   grid-template-areas:
     "header header"
     "sidebar content";
-  grid-template-columns: 1fr 18fr;
-  grid-template-rows: 8vh 1fr;
+  grid-template-columns: auto 12fr;
 }
 
 .header {
@@ -43,11 +42,14 @@
 
 .sidebar {
   background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .sidebar .button {
   display: block;
-  padding: 1.2rem 2rem;
+  padding: 0 1rem;
   color: red;
   text-align: center;
   text-decoration: none;
@@ -56,6 +58,9 @@
 
 .sidebar .button:first-of-type {
   padding-top: 2rem;
+}
+.sidebar h2 {
+  max-width: 9ch;
 }
 
 .sidebar .current {
@@ -128,4 +133,8 @@
   /* border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent; */
   border: 1px black solid;
   cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
