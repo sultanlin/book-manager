@@ -21,12 +21,10 @@ public class LibraryApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
 
-        // RestClient restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
+        RestClient restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
 
-        RestClient client =
-                RestClient.builder().baseUrl("https://api.hardcover.app/v1/graphql").build();
         HttpSyncGraphQlClient graphQlClient =
-                HttpSyncGraphQlClient.builder(client)
+                HttpSyncGraphQlClient.builder(restClient)
                         .headers(
                                 (headers) ->
                                         headers.add(
@@ -41,26 +39,28 @@ public class LibraryApplication {
                         .retrieveSync("search")
                         .toEntity(JsonNode.class);
 
-        System.out.println(book);
+        // System.out.println(book);
 
-        String document =
+        String document2 =
                 """
- {
-    search(query: "%s", query_type: "Book",
+query bookByName($bookName: String!, $qType: String!) {
+    search(query: $bookName, query_type: $qType,
     per_page: 10, page: 1) {
         results
     }
 }
-"""
-                        .formatted(bookName);
+""";
 
+        String qt = "Book";
         try {
             JsonNode project =
                     graphQlClient
-                            .document(document)
+                            .document(document2)
+                            .variable("bookName", bookName)
+                            .variable("qType", qt)
                             .retrieveSync("search")
                             .toEntity(JsonNode.class);
-            // System.out.println("Project is " + project);
+            System.out.println("Project is " + project);
         } catch (FieldAccessException ex) {
             ClientGraphQlResponse response = ex.getResponse();
             // ...
