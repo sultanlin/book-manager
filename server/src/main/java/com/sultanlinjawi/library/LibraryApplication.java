@@ -32,16 +32,8 @@ public class LibraryApplication {
                         .build();
 
         String bookName = "dune";
-        JsonNode book =
-                graphQlClient
-                        .documentName("bookByName")
-                        .variable("bookName", bookName)
-                        .retrieveSync("search")
-                        .toEntity(JsonNode.class);
 
-        // System.out.println(book);
-
-        String document2 =
+        String document =
                 """
 query bookByName($bookName: String!, $qType: String!) {
     search(query: $bookName, query_type: $qType,
@@ -51,13 +43,12 @@ query bookByName($bookName: String!, $qType: String!) {
 }
 """;
 
-        String qt = "Book";
         try {
             JsonNode project =
                     graphQlClient
-                            .document(document2)
+                            .document(document)
                             .variable("bookName", bookName)
-                            .variable("qType", qt)
+                            .variable("qType", "Book")
                             .retrieveSync("search")
                             .toEntity(JsonNode.class);
             System.out.println("Project is " + project);
