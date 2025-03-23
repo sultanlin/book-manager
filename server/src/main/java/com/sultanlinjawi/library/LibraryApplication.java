@@ -21,44 +21,6 @@ public class LibraryApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
 
-        RestClient restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
-
-        HttpSyncGraphQlClient graphQlClient =
-                HttpSyncGraphQlClient.builder(restClient)
-                        .headers(
-                                (headers) ->
-                                        headers.add(
-                                                "authorization", System.getenv("authorization")))
-                        .build();
-
-        String bookName = "dune";
-
-        String document =
-                """
-query bookByName($bookName: String!, $qType: String!) {
-    search(query: $bookName, query_type: $qType,
-    per_page: 10, page: 1) {
-        results
-    }
-}
-""";
-
-        try {
-            JsonNode project =
-                    graphQlClient
-                            .document(document)
-                            .variable("bookName", bookName)
-                            .variable("qType", "Book")
-                            .retrieveSync("search")
-                            .toEntity(JsonNode.class);
-            System.out.println("Project is " + project);
-        } catch (FieldAccessException ex) {
-            ClientGraphQlResponse response = ex.getResponse();
-            // ...
-            ClientResponseField field = ex.getField();
-            // return fallback value
-            System.out.println("No book found?!?");
-        }
     }
 
     @Bean
