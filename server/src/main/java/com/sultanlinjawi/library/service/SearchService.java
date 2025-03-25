@@ -13,7 +13,7 @@ import org.springframework.web.client.RestClient;
 public class SearchService {
     public JsonNode search(String name, String type) {
 
-        String document =
+        var document =
                 """
 query bookByName($name: String!, $type: String!) {
     search(query: $name, query_type: $type,
@@ -23,9 +23,9 @@ query bookByName($name: String!, $type: String!) {
 }
 """;
 
-        RestClient restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
+        var restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
 
-        HttpSyncGraphQlClient graphQlClient =
+        var graphQlClient =
                 HttpSyncGraphQlClient.builder(restClient)
                         .headers(
                                 (headers) ->
@@ -33,16 +33,16 @@ query bookByName($name: String!, $type: String!) {
                                                 "authorization", System.getenv("authorization")))
                         .build();
 
-        JsonNode project = null;
         // TODO: Check out proper graphql query practices for error handling
         try {
-            project =
+            JsonNode project =
                     graphQlClient
                             .document(document)
                             .variable("name", name)
                             .variable("type", type)
                             .retrieveSync("search")
                             .toEntity(JsonNode.class);
+            return project;
         } catch (FieldAccessException ex) {
             ClientGraphQlResponse response = ex.getResponse();
             System.out.println(response);
@@ -51,7 +51,7 @@ query bookByName($name: String!, $type: String!) {
             System.out.println(field);
             // return fallback value
             System.out.println(ex);
+            return null;
         }
-        return project;
     }
 }
