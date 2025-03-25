@@ -17,7 +17,8 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public JsonNode getResults(@RequestParam(name = "book") String bookName) {
-        return searchService.searchBook(bookName);
+    public JsonNode search(
+            @RequestParam String name, @RequestParam(defaultValue = "Book") String type) {
+        return searchService.search(name, type);
     }
 }

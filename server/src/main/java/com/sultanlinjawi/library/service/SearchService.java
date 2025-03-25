@@ -11,12 +11,13 @@ import org.springframework.web.client.RestClient;
 
 @Service
 public class SearchService {
-    public JsonNode searchBook(String bookName) {
+    public JsonNode search(String name, String type) {
+
         String document =
                 """
-query bookByName($bookName: String!) {
-    search(query: $bookName, query_type: "Book",
-    per_page: 1, page: 1) {
+query bookByName($name: String!, $type: String!) {
+    search(query: $name, query_type: $type,
+    per_page: 10, page: 1) {
         results
     }
 }
@@ -38,7 +39,8 @@ query bookByName($bookName: String!) {
             project =
                     graphQlClient
                             .document(document)
-                            .variable("bookName", bookName)
+                            .variable("name", name)
+                            .variable("type", type)
                             .retrieveSync("search")
                             .toEntity(JsonNode.class);
         } catch (FieldAccessException ex) {
