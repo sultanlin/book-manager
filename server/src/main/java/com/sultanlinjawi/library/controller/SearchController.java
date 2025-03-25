@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.sultanlinjawi.library.service.SearchService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,7 +17,7 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public JsonNode getResults() {
-        return searchService.searchBook();
+    public JsonNode getResults(@RequestParam(name = "book") String bookName) {
+        return searchService.searchBook(bookName);
     }
 }

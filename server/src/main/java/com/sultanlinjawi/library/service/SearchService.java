@@ -11,9 +11,7 @@ import org.springframework.web.client.RestClient;
 
 @Service
 public class SearchService {
-    public JsonNode searchBook() {
-        String bookName = "lord of the rings";
-
+    public JsonNode searchBook(String bookName) {
         String document =
                 """
 query bookByName($bookName: String!) {
