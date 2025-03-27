@@ -11,33 +11,34 @@ import org.springframework.web.client.RestClient;
 
 @Service
 public class SearchService {
-    public JsonNode search(String name, String type) {
 
-        var document =
-                """
-query bookByName($name: String!, $type: String!) {
-    search(query: $name, query_type: $type,
-    per_page: 10, page: 1) {
-        results
-    }
-}
-""";
+    private final HttpSyncGraphQlClient graphQlClient;
+    private final String query;
 
+    public SearchService() {
         var restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
-
-        var graphQlClient =
+        this.graphQlClient =
                 HttpSyncGraphQlClient.builder(restClient)
                         .headers(
                                 (headers) ->
                                         headers.add(
                                                 "authorization", System.getenv("authorization")))
                         .build();
+        this.query =
+                """
+                query bookByName($name: String!, $type: String!) {
+                        search(query: $name, query_type: $type, per_page: 10, page: 1) {
+                                results
+                        }
+                } """;
+    }
 
+    public JsonNode search(String name, String type) {
         // TODO: Check out proper graphql query practices for error handling
         try {
             JsonNode project =
                     graphQlClient
-                            .document(document)
+                            .document(this.query)
                             .variable("name", name)
                             .variable("type", type)
                             .retrieveSync("search")
