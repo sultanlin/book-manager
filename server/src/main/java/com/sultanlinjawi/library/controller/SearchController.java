@@ -3,10 +3,12 @@ package com.sultanlinjawi.library.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sultanlinjawi.library.service.SearchService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin // (origins = "http://localhost:5173")
 @RestController
 public class SearchController {
 
