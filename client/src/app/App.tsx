@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 // import "./App.css"
-import "./style.css"
+import "../assets/style.css"
 import MainPage from "../features/home/MainPage"
 
 function App() {
