@@ -1,6 +1,7 @@
 import HomeIcon from "@mui/icons-material/Home"
 import AddIcon from "@mui/icons-material/Add"
-import SidebarButton from "./SidebarButton"
+import SidebarButton from "@/features/home/SidebarButton"
+
 function Sidebar() {
   // TODO: Add a burger to minimize navbar, like in youtube
   // Make each setting/button into its own component

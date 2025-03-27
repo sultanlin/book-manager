@@ -1,4 +1,4 @@
-import BookProps from "../../types/BookProps"
+import BookProps from "@/types/BookProps"
 
 function Book({ book }: { book: BookProps }) {
   return (

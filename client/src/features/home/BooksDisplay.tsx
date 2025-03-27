@@ -1,10 +1,11 @@
-import Book from "@src/features/home/Book"
-import BookProps from "@src/types/BookProps"
+import Book from "@/features/home/Book"
+import BookProps from "@/types/BookProps"
 import { ReactNode } from "react"
 import img from "../../assets/cover.jpg"
 
 function BooksDisplay(): ReactNode {
-  // TODO: Layout is ruined with only 1 book
+  // FIX: Layout is ruined with only 1 book
+  // TODO: Get BookProps from API
   const books: BookProps[] = [
     { name: "first book", cover: img, author: "J.K. 1" },
     { name: "second book", cover: img, author: "J.K. 2" },

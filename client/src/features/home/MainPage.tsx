@@ -1,6 +1,6 @@
-import BooksDisplay from "./BooksDisplay"
-import Header from "./Header"
-import Sidebar from "./Sidebar"
+import BooksDisplay from "@/features/home/BooksDisplay"
+import Header from "@/features/home/Header"
+import Sidebar from "@/features/home/Sidebar"
 
 function MainPage() {
   {

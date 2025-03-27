@@ -1,6 +1,6 @@
-import Logo from "./Logo"
-import Search from "./Search"
-import UserCard from "./UserCard"
+import Logo from "@/features/home/Logo"
+import Search from "@/features/home/Search"
+import UserCard from "@/features/home/UserCard"
 
 function Header() {
   return (
