@@ -1,5 +1,5 @@
-import Book from "./Book"
-import BookProps from "../../types/BookProps"
+import Book from "@src/features/home/Book"
+import BookProps from "@src/types/BookProps"
 import { ReactNode } from "react"
 import img from "../../assets/cover.jpg"
 
