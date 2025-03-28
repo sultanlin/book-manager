@@ -13,10 +13,6 @@ function Sidebar() {
     <nav role="toolbar" className="sidebar">
       <SidebarButton isCurrent={true} href="">
         <HomeIcon color="primary" fontSize="large" />
-        <h2>All Books</h2>
-      </SidebarButton>
-      <SidebarButton href="">
-        <HomeIcon color="primary" fontSize="large" />
         <h2>Your Books</h2>
       </SidebarButton>
       {collections.map((c) => (
