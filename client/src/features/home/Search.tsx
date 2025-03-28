@@ -13,10 +13,10 @@ function Search() {
           <SearchIcon className="icon" />
         </label>
       </div>
-      <select>
-        <option>Book</option>
-        <option>Author</option>
-      </select>
+      {/* <select> */}
+      {/*   <option>Book</option> */}
+      {/*   <option>Author</option> */}
+      {/* </select> */}
     </form>
   )
 }
