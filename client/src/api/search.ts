@@ -1,4 +1,7 @@
 // TODO: unmarshal json to appropriate obj
+
+import BookProps from "@/types/BookProps"
+
 // name, author, cover
 export default function searchBooks(
   bookName: string,
