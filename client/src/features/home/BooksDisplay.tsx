@@ -1,38 +1,29 @@
 import Book from "@/features/home/Book"
 import BookProps from "@/types/BookProps"
-import { ReactNode } from "react"
-import img from "../../assets/cover.jpg"
+import { ReactNode, useEffect, useState } from "react"
+import searchBooks from "@/api/search"
 
 function BooksDisplay(): ReactNode {
-  // FIX: Layout is ruined with only 1 book
+  // FIX: Layout is ruined with only 1 book, header too big
+  // FIX: Some covers are too small, ruins books display
   // TODO: Get BookProps from API
-  const books: BookProps[] = [
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "first book", cover: img, author: "J.K. 1" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-    { name: "second book", cover: img, author: "J.K. 2" },
-  ]
+  const [booksSearched, setBooksSearched] = useState<BookProps[]>()
+  // const bookName = "harry+potter"
+  const bookName = "lord+of+the+rings"
+  console.log(searchBooks(bookName))
+
+  useEffect(() => {
+    const getBooks = async () => {
+      setBooksSearched(await searchBooks(bookName))
+    }
+    getBooks().catch((err) => console.log(err))
+  }, [])
+
+  console.log(booksSearched)
+
   return (
     <main className="content">
-      {books.map((b) => (
-        <Book book={b} />
-      ))}
+      {booksSearched && booksSearched.map((b) => <Book book={b} />)}
     </main>
   )
 }

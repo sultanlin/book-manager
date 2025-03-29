@@ -8,8 +8,8 @@ function Book({ book }: { book: BookProps }) {
         className="cover"
         alt="everything for dummies book cover"
       />
-      <p>Name: {book.name}</p>
-      <p>Author: {book.author}</p>
+      <p>{book.name}</p>
+      <p>{book.author}</p>
     </article>
   )
 }
