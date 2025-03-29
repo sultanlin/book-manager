@@ -1,8 +1,9 @@
 import HomeIcon from "@mui/icons-material/Home"
 import AddIcon from "@mui/icons-material/Add"
-import SidebarButton from "@/features/home/SidebarButton"
+import SidebarButton from "@/features/ui/sidebar-button"
 
 function Sidebar() {
+  // FIX: Make sidebar size static (it currently changes based on shelf name size)
   // TODO: Add a burger to minimize navbar, like in youtube
   // Make each setting/button into its own component
   // Add ID for each "collection" and use it as key

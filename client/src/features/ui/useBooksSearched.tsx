@@ -1,11 +1,8 @@
-import Book from "@/features/home/Book"
-import BookProps from "@/types/BookProps"
-import { ReactNode, useEffect, useState } from "react"
 import searchBooks from "@/api/search"
+import BookProps from "@/types/BookProps"
+import { useEffect, useState } from "react"
 
-function BooksDisplay(): ReactNode {
-  // FIX: Layout is ruined with only 1 book, header too big
-  // FIX: Some covers are too small, ruins books display
+export default function useBooksSearched() {
   // TODO: Get BookProps from API
   const [booksSearched, setBooksSearched] = useState<BookProps[]>()
   // const bookName = "harry+potter"
@@ -20,12 +17,5 @@ function BooksDisplay(): ReactNode {
   }, [])
 
   console.log(booksSearched)
-
-  return (
-    <main className="content">
-      {booksSearched && booksSearched.map((b) => <Book book={b} />)}
-    </main>
-  )
+  return booksSearched
 }
-
-export default BooksDisplay
