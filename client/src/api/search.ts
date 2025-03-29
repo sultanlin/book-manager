@@ -1,12 +1,10 @@
-// TODO: unmarshal json to appropriate obj
-
 import BookProps from "@/types/BookProps"
 
-// name, author, cover
-export default function searchBooks(
+export default async function searchBooks(
   bookName: string,
   queryType: string = "book",
-) {
+): Promise<BookProps[]> {
+  const books: BookProps[] = []
   let typeParam = ""
   if (queryType) {
     typeParam = `type=${queryType}`
@@ -14,8 +12,26 @@ export default function searchBooks(
   const queryParams = `?name=${bookName}&${typeParam}`
   console.log(queryParams)
 
-  fetch("http://localhost:8080/api/v1/search" + queryParams)
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err))
+  const response = await fetch(
+    "http://192.168.1.44:8080/api/v1/search" + queryParams,
+  )
+  const data = await response.json()
+
+  data.results.hits.map(
+    (hit: {
+      document: {
+        author_names: [string]
+        title: string
+        image: { url: string }
+      }
+    }) => {
+      books.push({
+        author: hit.document.author_names[0],
+        name: hit.document.title,
+        cover: hit.document.image.url,
+      })
+    },
+  )
+
+  return books
 }
