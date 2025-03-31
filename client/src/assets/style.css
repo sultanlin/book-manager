@@ -138,3 +138,9 @@
 .hide {
   display: none;
 }
+
+.cover {
+  object-fit: fill;
+  width: 100%;
+  height: 20rem;
+}
