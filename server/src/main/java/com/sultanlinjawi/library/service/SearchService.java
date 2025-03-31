@@ -27,7 +27,7 @@ public class SearchService {
         this.query =
                 """
                 query bookByName($name: String!, $type: String!) {
-                        search(query: $name, query_type: $type, per_page: 50, page: 1) {
+                        search(query: $name, query_type: $type, per_page: 25, page: 1) {
                                 results
                         }
                 } """;
