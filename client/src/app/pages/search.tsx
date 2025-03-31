@@ -1,4 +1,4 @@
-import BooksDisplay from "@/features/books"
+import BookList from "@/features/books"
 import { Logo, UserCard } from "@/features/header"
 import useBooksSearched, { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
@@ -24,7 +24,7 @@ function Search() {
       {loading && (
         <div className="content">Getting books, please wait a moment...</div>
       )}
-      {!loading && <BooksDisplay booksList={books} />}
+      {!loading && <BookList booksList={books} />}
     </div>
   )
 }

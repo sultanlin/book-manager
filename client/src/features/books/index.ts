@@ -1,1 +1,1 @@
-export { default } from "./books-display"
+export { default } from "./book-list"
