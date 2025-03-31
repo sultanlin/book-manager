@@ -60,9 +60,6 @@
 .sidebar .button:first-of-type {
   padding-top: 2rem;
 }
-.sidebar p {
-  max-width: 9ch;
-}
 
 .sidebar .current {
   border-left: green 0.5rem solid;
@@ -70,6 +67,7 @@
 }
 
 .sidebar p {
+  max-width: 9ch;
   font-size: 1.4rem;
   line-height: 1.2;
 }
