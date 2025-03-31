@@ -7,12 +7,6 @@ export default function useBooksSearched(
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   search: string,
 ): void {
-  // TODO: Get BookProps from API
-  const [booksSearched, setBooksSearched] = useState<BookProps[]>([])
-  // const bookName = "harry+potter"
-  // const bookName = "lord+of+the+rings"
-  // console.log(searchBooks(bookName))
-
   useEffect(() => {
     const getBooks = async () => {
       setLoading(true)
@@ -27,7 +21,4 @@ export default function useBooksSearched(
     getBooks()
     // getBooks().catch((err) => console.log(err))
   }, [])
-
-  console.log(booksSearched)
-  return booksSearched
 }
