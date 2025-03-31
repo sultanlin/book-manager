@@ -4,9 +4,12 @@ import useBooksSearched, { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
 
 function Search() {
+  const [search, setSearch] = useState("lord+of+the+rings")
+  const [books, setBooks] = useState<BookMetadata[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   // Holy grail, with header, sidebar (nav), and main content
   // Make sidebar disappear/appear feature
-  const booksSearched = useBooksSearched()
+  useBooksSearched(setBooks, setLoading, search)
   return (
     <div className="container grid">
       {/* <Header /> */}
@@ -16,7 +19,10 @@ function Search() {
         <UserCard />
       </header>
       <Sidebar />
-      <BooksDisplay booksList={booksSearched} />
+      {loading && (
+        <div className="content">Getting books, please wait a moment...</div>
+      )}
+      {!loading && <BooksDisplay booksList={books} />}
     </div>
   )
 }
