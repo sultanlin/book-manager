@@ -1,5 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search"
-function Search() {
+function SearchBar() {
   return (
     <form className="search">
       <div className="searchbar">
@@ -21,4 +21,4 @@ function Search() {
   )
 }
 
-export default Search
+export default SearchBar

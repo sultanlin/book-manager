@@ -1,6 +1,6 @@
 import BooksDisplay from "@/features/books"
-import Header from "@/features/header"
-import useBooksSearched from "@/features/search"
+import { Logo, UserCard } from "@/features/header"
+import useBooksSearched, { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
 
 function Search() {
@@ -9,7 +9,12 @@ function Search() {
   const booksSearched = useBooksSearched()
   return (
     <div className="container grid">
-      <Header />
+      {/* <Header /> */}
+      <header className="header">
+        <Logo />
+        <SearchBar />
+        <UserCard />
+      </header>
       <Sidebar />
       <BooksDisplay booksList={booksSearched} />
     </div>
