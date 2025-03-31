@@ -7,6 +7,7 @@
     "header header"
     "sidebar content";
   grid-template-columns: auto 12fr;
+  grid-template-rows: auto 1fr;
 }
 
 .header {
@@ -21,7 +22,7 @@
 
 .header {
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   align-items: center;
   gap: 10rem;
 }
