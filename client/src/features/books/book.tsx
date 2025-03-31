@@ -4,8 +4,8 @@ function Book({ book }: { book: BookMetadata }) {
   return (
     <article className="book">
       <img src={book.cover} className="cover" alt="book cover" />
-      <p>{book.name}</p>
-      <p>{book.author}</p>
+      <p className="name">{book.name}</p>
+      <p className="author">{book.author}</p>
     </article>
   )
 }
