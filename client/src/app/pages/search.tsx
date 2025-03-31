@@ -2,7 +2,10 @@ import BooksDisplay from "@/features/books"
 import { Logo, UserCard } from "@/features/header"
 import useBooksSearched, { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
+import BookMetadata from "@/types/BookProps"
+import { useState } from "react"
 
+// const POSTS_PER_PAGE = 10
 function Search() {
   const [search, setSearch] = useState("lord+of+the+rings")
   const [books, setBooks] = useState<BookMetadata[]>([])
@@ -12,7 +15,6 @@ function Search() {
   useBooksSearched(setBooks, setLoading, search)
   return (
     <div className="container grid">
-      {/* <Header /> */}
       <header className="header">
         <Logo />
         <SearchBar />

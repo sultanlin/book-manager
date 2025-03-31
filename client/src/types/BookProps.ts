@@ -1,4 +1,4 @@
-export default interface BookProps {
+export default interface BookMetadata {
   name: string
   author: string
   cover: string

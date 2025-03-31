@@ -1,6 +1,6 @@
-import BookProps from "@/types/BookProps"
+import BookMetadata from "@/types/BookProps"
 
-function Book({ book }: { book: BookProps }) {
+function Book({ book }: { book: BookMetadata }) {
   return (
     <article className="book">
       <img

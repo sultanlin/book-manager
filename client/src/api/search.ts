@@ -1,10 +1,10 @@
-import BookProps from "@/types/BookProps"
+import BookMetadata from "@/types/BookProps"
 
 export default async function searchBooks(
   bookName: string,
   queryType: string = "book",
-): Promise<BookProps[]> {
-  const books: BookProps[] = []
+): Promise<BookMetadata[]> {
+  const books: BookMetadata[] = []
   let typeParam = ""
   if (queryType) {
     typeParam = `type=${queryType}`
