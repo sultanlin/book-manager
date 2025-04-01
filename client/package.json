@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",
+    "@fontsource-variable/alegreya": "^5.2.5",
+    "@fontsource/alegreya-sans": "^5.2.5",
     "@mui/icons-material": "^6.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
