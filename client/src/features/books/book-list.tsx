@@ -3,6 +3,7 @@ import BookMetadata from "@/types/BookProps"
 import { ReactNode } from "react"
 
 function BookList({ booksList }: { booksList: BookMetadata[] }): ReactNode {
+  // FIX: Add keys to list
   return (
     <main className="content">
       {booksList.map((b) => (
