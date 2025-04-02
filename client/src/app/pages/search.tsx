@@ -4,30 +4,24 @@ import useBooksSearched, { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
 import BookMetadata from "@/types/BookProps"
 import { useState } from "react"
+import { useSearchParams } from "react-router-dom"
 
 // const POSTS_PER_PAGE = 10
 function Search() {
-  const [search, setSearch] = useState("lord+of+the+rings")
+  const [searchParams] = useSearchParams()
+  const search = searchParams.get("search") || ""
+  console.log(search)
   const [books, setBooks] = useState<BookMetadata[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   // Holy grail, with header, sidebar (nav), and main content
   // Make sidebar disappear/appear feature
   useBooksSearched(setBooks, setLoading, search)
 
-  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // on submit, we want the search to be set?
-    // event.preventDefault()
-
-    const formData = new FormData(event.currentTarget)
-    const inputValue = formData.get("search")
-
-    setSearch(inputValue?.toString() || "")
-  }
   return (
     <div className="container grid">
       <header className="header">
         <Logo />
-        <SearchBar handleSubmit={handleSearchSubmit} />
+        <SearchBar />
         <UserCard />
       </header>
       <Sidebar />

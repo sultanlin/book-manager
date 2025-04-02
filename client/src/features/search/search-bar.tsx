@@ -2,14 +2,10 @@ import SearchIcon from "@mui/icons-material/Search"
 import { useState } from "react"
 import { Form } from "react-router-dom"
 
-function SearchBar({
-  handleSubmit,
-}: {
-  handleSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
-}) {
+function SearchBar() {
   const [value, setValue] = useState("")
   return (
-    <Form className="search" onSubmit={handleSubmit} action="/search">
+    <Form className="search" action="/search">
       <div className="searchbar">
         <input
           type="text"
