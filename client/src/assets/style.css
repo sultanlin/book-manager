@@ -8,12 +8,17 @@
 @import "@fontsource/alegreya-sans/900.css";
 
 :root {
-  --font: "Alegreya Sans", sans;
-  --font-mono: "Alegreya Variable", serif;
+  --sans: "Alegreya Sans", sans;
+  --mono: "Alegreya Variable", serif;
+  --lightest: #fab280;
+  --darkest: #914409;
+  --light: #ef954b;
+  --dark: #ad5f26;
+  --secondary: #dc7d27;
 }
 
 body {
-  font-family: var(--font);
+  font-family: var(--sans);
 }
 
 .grid.container {
@@ -41,6 +46,7 @@ body {
   padding: 1.5rem 2rem;
   align-items: center;
   gap: 10rem;
+  background-color: var(--secondary);
 }
 
 .content {
@@ -50,16 +56,16 @@ body {
   padding: 2rem 5rem;
   grid-auto-rows: max-content;
   gap: 2rem;
-  background-color: grey;
+  background-color: var(--darkest);
   overflow: auto;
 }
 
 .book {
-  background-color: white;
+  background-color: var(--light);
 }
 
 .sidebar {
-  background-color: lightgray;
+  background-color: var(--dark);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -68,7 +74,7 @@ body {
 .sidebar .button {
   display: block;
   padding: 0 1rem;
-  color: red;
+  color: var(--lightest);
   text-align: center;
   text-decoration: none;
   font-style: none;
@@ -80,7 +86,7 @@ body {
 
 .sidebar .current {
   border-left: green 0.5rem solid;
-  background-color: black;
+  background-color: var(--secondary);
 }
 
 .sidebar p {
@@ -123,7 +129,7 @@ body {
   border: none;
   flex: 1;
   padding: 0.6rem;
-  font-family: var(--font-mono);
+  font-family: var(--mono);
 }
 
 .searchbar input:focus {
@@ -168,7 +174,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-family: var(--font-mono);
+  font-family: var(--mono);
 }
 
 .book .name {
