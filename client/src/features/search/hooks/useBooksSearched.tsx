@@ -20,5 +20,6 @@ export default function useBooksSearched(
     }
     getBooks()
     // getBooks().catch((err) => console.log(err))
-  }, [])
+  }, [search, setLoading, setBooks])
+  // TODO: Check if the dependency array is correct
 }
