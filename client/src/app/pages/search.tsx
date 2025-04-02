@@ -13,11 +13,21 @@ function Search() {
   // Holy grail, with header, sidebar (nav), and main content
   // Make sidebar disappear/appear feature
   useBooksSearched(setBooks, setLoading, search)
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // on submit, we want the search to be set?
+    // event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const inputValue = formData.get("search")
+
+    setSearch(inputValue?.toString() || "")
+  }
   return (
     <div className="container grid">
       <header className="header">
         <Logo />
-        <SearchBar />
+        <SearchBar handleSubmit={handleSearchSubmit} />
         <UserCard />
       </header>
       <Sidebar />

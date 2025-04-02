@@ -1,13 +1,23 @@
 import SearchIcon from "@mui/icons-material/Search"
-function SearchBar() {
+import { useState } from "react"
+import { Form } from "react-router-dom"
+
+function SearchBar({
+  handleSubmit,
+}: {
+  handleSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
+}) {
+  const [value, setValue] = useState("")
   return (
-    <form className="search">
+    <Form className="search" onSubmit={handleSubmit} action="/search">
       <div className="searchbar">
         <input
           type="text"
           name="search"
           id="search"
           placeholder="Search books or authors"
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
         />
         <label htmlFor="search">
           <SearchIcon className="icon" />
@@ -17,7 +27,7 @@ function SearchBar() {
       {/*   <option>Book</option> */}
       {/*   <option>Author</option> */}
       {/* </select> */}
-    </form>
+    </Form>
   )
 }
 
