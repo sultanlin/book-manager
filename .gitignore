@@ -4,6 +4,7 @@ today.txt
 .direnv/
 .git-bak/
 library.zip
+.env
 
 HELP.md
 target/
