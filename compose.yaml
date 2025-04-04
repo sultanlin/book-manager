@@ -1,0 +1,32 @@
+services:
+  backend:
+    image: "book-manager-backend:latest"
+    build:
+      context: ./server/.
+    container_name: backend
+    ports:
+      - 8080:8080 # Maps port 8080 in the container to port 18080 on the host.
+    # depends_on:
+    #   - db
+    environment:
+      - authorization=${authorization}
+    volumes:
+      - ${base_dir}/server:/app
+
+  frontend:
+    image: "book-manager-frontend:latest"
+    build:
+      context: ./client/.
+    container_name: frontend
+    ports:
+      - 8000:8080 # Maps port 8080 in the container to port 18080 on the host.
+    volumes:
+      - ${base_dir}/client:/app
+    depends_on:
+      - backend
+# db:
+#   image: 'postgres:13.1-alpine'
+#   container_name: db
+#   environment:
+#     - POSTGRES_USER=compose-postgres
+#     - POSTGRES_PASSWORD=compose-postgres
