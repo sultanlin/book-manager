@@ -6,12 +6,17 @@ services:
     container_name: backend
     ports:
       - 8080:8080 # Maps port 8080 in the container to port 18080 on the host.
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     environment:
       - authorization=${authorization}
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_HOST=$POSTGRES_HOST
+      - POSTGRES_DB=$POSTGRES_DB
     volumes:
       - ${base_dir}/server:/app
+    restart: unless-stopped
 
   frontend:
     image: "book-manager-frontend:latest"
@@ -24,6 +29,7 @@ services:
       - ${base_dir}/client:/app
     depends_on:
       - backend
+    restart: unless-stopped
 
   db:
     image: postgres:17-bookworm
