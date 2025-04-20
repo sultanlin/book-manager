@@ -1,4 +1,4 @@
-package com.sultanlinjawi.library.controller;
+package com.sultanlinjawi.library.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sultanlinjawi.library.service.SearchService;

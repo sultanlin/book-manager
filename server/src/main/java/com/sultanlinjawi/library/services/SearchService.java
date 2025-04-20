@@ -1,4 +1,4 @@
-package com.sultanlinjawi.library.service;
+package com.sultanlinjawi.library.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
