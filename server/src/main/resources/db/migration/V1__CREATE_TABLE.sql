@@ -1,6 +1,5 @@
--- DB Schemas here
 CREATE TABLE IF NOT EXISTS users (
-    id integer PRIMARY KEY,
-    username text,
-    password text
+    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username text UNIQUE NOT NULL,
+    password text NOT NULL
 );
