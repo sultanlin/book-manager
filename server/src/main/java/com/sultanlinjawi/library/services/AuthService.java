@@ -5,6 +5,8 @@ import com.sultanlinjawi.library.models.User;
 import com.sultanlinjawi.library.repos.UserRepo;
 import com.sultanlinjawi.library.security.UserDetailsImpl;
 
+import jakarta.transaction.Transactional;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +37,7 @@ public class AuthService {
         this.userRepo = userRepo;
     }
 
+    @Transactional
     public UserDetailsImpl register(RegisterRequest registerRequest) {
 
         Optional<User> user = userRepo.findByUsername(registerRequest.getUsername());
