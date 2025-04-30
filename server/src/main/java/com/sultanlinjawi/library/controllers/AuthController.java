@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
-import javax.naming.AuthenticationException;
-
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -38,8 +36,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest)
-            throws AuthenticationException {
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest) {
         UserDetailsImpl userDetails = authService.register(registerRequest);
         String tokenVal = jwtService.generateToken(userDetails);
         AuthResponse authResponse =

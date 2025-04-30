@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import javax.naming.AuthenticationException;
-
 @Service
 @Slf4j
 public class AuthService {
@@ -37,14 +35,12 @@ public class AuthService {
         this.userRepo = userRepo;
     }
 
-    public UserDetailsImpl register(RegisterRequest registerRequest)
-            throws AuthenticationException {
+    public UserDetailsImpl register(RegisterRequest registerRequest) {
 
         Optional<User> user = userRepo.findByUsername(registerRequest.getUsername());
 
         if (user.isPresent()) {
-            // TODO: Better exception
-            throw new AuthenticationException("User already exists");
+            throw new IllegalArgumentException("Username is taken");
         }
 
         if (!registerRequest.getPassword().equals(registerRequest.getPasswordConfirmation())) {
