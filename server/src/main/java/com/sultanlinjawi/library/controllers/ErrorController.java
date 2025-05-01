@@ -4,6 +4,7 @@ import com.sultanlinjawi.library.dto.ErrorResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.graphql.client.FieldAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -44,6 +45,17 @@ public class ErrorController {
         var error =
                 ErrorResponse.builder()
                         .status(HttpStatus.UNAUTHORIZED)
+                        .message(ex.getMessage())
+                        .build();
+        return ResponseEntity.status(error.getStatus()).body(error);
+    }
+
+    @ExceptionHandler(FieldAccessException.class)
+    public ResponseEntity<ErrorResponse> handleFieldAccessException(FieldAccessException ex) {
+        log.error("Graphql query parsing exception: " + ex);
+        var error =
+                ErrorResponse.builder()
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .message(ex.getMessage())
                         .build();
         return ResponseEntity.status(error.getStatus()).body(error);

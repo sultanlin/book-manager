@@ -2,9 +2,6 @@ package com.sultanlinjawi.library.services;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import org.springframework.graphql.client.ClientGraphQlResponse;
-import org.springframework.graphql.client.ClientResponseField;
-import org.springframework.graphql.client.FieldAccessException;
 import org.springframework.graphql.client.HttpSyncGraphQlClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -34,25 +31,13 @@ public class SearchService {
     }
 
     public JsonNode search(String name, String type) {
-        // TODO: Check out proper graphql query practices for error handling
-        try {
-            JsonNode project =
-                    graphQlClient
-                            .document(this.query)
-                            .variable("name", name)
-                            .variable("type", type)
-                            .retrieveSync("search")
-                            .toEntity(JsonNode.class);
-            return project;
-        } catch (FieldAccessException ex) {
-            ClientGraphQlResponse response = ex.getResponse();
-            System.out.println(response);
-            // ...
-            ClientResponseField field = ex.getField();
-            System.out.println(field);
-            // return fallback value
-            System.out.println(ex);
-            return null;
-        }
+        JsonNode project =
+                graphQlClient
+                        .document(this.query)
+                        .variable("name", name)
+                        .variable("type", type)
+                        .retrieveSync("search")
+                        .toEntity(JsonNode.class);
+        return project;
     }
 }
