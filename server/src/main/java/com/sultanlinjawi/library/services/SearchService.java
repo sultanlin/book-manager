@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.graphql.client.HttpSyncGraphQlClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,14 +22,12 @@ public class SearchService {
                     }
             } """;
 
-    public JsonNode search(String name, String type) {
-        JsonNode project =
-                graphQlClient
-                        .document(this.query)
-                        .variable("name", name)
-                        .variable("type", type)
-                        .retrieveSync("search")
-                        .toEntity(JsonNode.class);
-        return project;
+    public SearchResults search(String name, String type) {
+        return graphQlClient
+                .document(this.query)
+                .variable("name", name)
+                .variable("type", type)
+                .retrieveSync("search")
+                .toEntity(SearchResults.class);
     }
 }
