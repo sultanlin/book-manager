@@ -38,7 +38,7 @@ public class Book {
     private String slug;
     private String subtitle;
 
-    public static Book BookFromSearchResults(BookSearchHit hit) {
+    public static Book from(BookSearchHit hit) {
         var document = hit.document();
         var author = "";
         var cover = "";
