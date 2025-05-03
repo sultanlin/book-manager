@@ -5,7 +5,8 @@ today.txt
 .git-bak/
 library.zip
 .env
-db/
+# FIX: db/ belongs to flyway, I want to block db/ for postgres
+db/pgdata/
 
 HELP.md
 target/
