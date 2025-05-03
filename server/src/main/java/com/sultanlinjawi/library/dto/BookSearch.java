@@ -2,6 +2,7 @@ package com.sultanlinjawi.library.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,11 +14,10 @@ public record BookSearch(BookSearchResults results) {
             public record BookSearchDocument(
                     ArrayList<String> author_names,
                     String description,
-                    boolean has_audiobook,
-                    long id,
+                    int id,
                     BookSearchImage image,
                     int pages,
-                    double rating,
+                    BigDecimal rating,
                     int ratings_count,
                     LocalDate release_date,
                     String slug,
