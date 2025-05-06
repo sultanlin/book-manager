@@ -1,7 +1,18 @@
 # Use an official Java runtime as a parent image
 FROM amazoncorretto:21.0.4-alpine3.18
-# Set the working directory in the container
-WORKDIR /app
+
+ENV UID 1000
+ENV GID 1000
+
+RUN addgroup -g ${GID} -S backend &&\
+    adduser -D -h /home/backend -u ${UID} -G backend -S backend &&\
+    # install -d -m 0755 -o www-data -g www-data /home/www-data &&\
+    chown --changes --silent --no-dereference --recursive ${UID}:${GID} \
+    /home/backend
+
+USER backend
+
+WORKDIR /home/backend/app
 # Copy the JAR file into the container
 # COPY target/containerize-java-spring-0.0.1-SNAPSHOT.jar app.jar
 # ARG JAR_FILE=*.jar
