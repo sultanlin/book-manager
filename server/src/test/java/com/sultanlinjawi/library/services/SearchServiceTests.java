@@ -45,6 +45,32 @@ public class SearchServiceTests {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName(
+            "When searching for book, correctly convert BookSearch dto to Book entity when fields"
+                    + " are null/empty")
+    public void NullFieldsDoesNotReturnError() {
+        InitGraphqlClientMock(getBookSearchB());
+
+        var expected = getBooksB();
+        var actual = service.search("spring+start+here", "Book");
+
+        Assertions.assertThat(actual).isNotNull();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("When searching for book, empty BookSearch gets converted to empty list of books")
+    public void EmptyBookSearchReturnsEmptyList() {
+        InitGraphqlClientMock(new BookSearch(new BookSearchResults(List.of())));
+
+        var expected = List.of();
+        var actual = service.search("spring+start+here", "Book");
+
+        Assertions.assertThat(actual).isNotNull();
+        assertEquals(expected, actual);
+    }
+
     private void InitGraphqlClientMock(BookSearch bookSearch) {
         var requestMock = Mockito.mock(GraphQlClient.RequestSpec.class);
         var requestMockWithVariable = Mockito.mock(GraphQlClient.RequestSpec.class);
@@ -122,6 +148,51 @@ public class SearchServiceTests {
                         .release_date(null)
                         .slug("spring-start-here")
                         .subtitle("Learn what you need and learn it well")
+                        .build());
+    }
+
+    public BookSearch getBookSearchB() {
+        return BookSearch.builder()
+                .results(
+                        BookSearchResults.builder()
+                                .hits(
+                                        List.of(
+                                                BookSearchHit.builder()
+                                                        .document(
+                                                                BookSearchDocument.builder()
+                                                                        .id(0)
+                                                                        .description(null)
+                                                                        .pages(0)
+                                                                        .rating(null)
+                                                                        .ratings_count(0)
+                                                                        .release_date(null)
+                                                                        .slug(null)
+                                                                        .subtitle(null)
+                                                                        .title(null)
+                                                                        .author_names(List.of())
+                                                                        .image(
+                                                                                new BookSearchImage(
+                                                                                        null))
+                                                                        .build())
+                                                        .build()))
+                                .build())
+                .build();
+    }
+
+    public List<Book> getBooksB() {
+        return List.of(
+                Book.builder()
+                        .id(0)
+                        .title(null)
+                        .author(null)
+                        .description(null)
+                        .pages(0)
+                        .rating(null)
+                        .ratings_count(0)
+                        .cover(null)
+                        .release_date(null)
+                        .slug(null)
+                        .subtitle(null)
                         .build());
     }
 }
