@@ -40,8 +40,8 @@ public class Book {
 
     public static Book from(BookSearchHit hit) {
         var document = hit.document();
-        var author = "";
-        var cover = "";
+        String author = null;
+        String cover = null;
 
         if (!(document.image().url() == null)) {
             cover = document.image().url().toString();
