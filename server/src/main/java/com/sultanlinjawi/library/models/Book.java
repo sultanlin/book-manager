@@ -5,18 +5,23 @@ import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -29,14 +34,16 @@ public class Book {
 
     private String author;
     private int pages;
-    // private double rating;
     private BigDecimal rating;
-    private int ratings_count;
+    private int ratingsCount;
     private String cover;
     private String description;
-    private LocalDate release_date;
+    private LocalDate releaseDate;
     private String slug;
     private String subtitle;
+
+    @ManyToMany(mappedBy = "books")
+    private final Set<Shelf> shelves = new HashSet<>();
 
     public static Book from(BookSearchHit hit) {
         var document = hit.document();
