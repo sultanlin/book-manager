@@ -2,6 +2,8 @@ package com.sultanlinjawi.library.controllers;
 
 import com.sultanlinjawi.library.dto.ErrorResponse;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.graphql.client.FieldAccessException;
@@ -45,6 +47,16 @@ public class ErrorController {
         var error =
                 ErrorResponse.builder()
                         .status(HttpStatus.UNAUTHORIZED)
+                        .message(ex.getMessage())
+                        .build();
+        return ResponseEntity.status(error.getStatus()).body(error);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEntityNotFoundException(EntityNotFoundException ex) {
+        var error =
+                ErrorResponse.builder()
+                        .status(HttpStatus.NOT_FOUND)
                         .message(ex.getMessage())
                         .build();
         return ResponseEntity.status(error.getStatus()).body(error);
