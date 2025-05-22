@@ -1,6 +1,6 @@
 package com.sultanlinjawi.library.controllers;
 
-import com.sultanlinjawi.library.models.Book;
+import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.services.SearchService;
 
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping("/api/v1/search")
-    public ResponseEntity<List<Book>> search(
+    public ResponseEntity<List<BookDto>> search(
             @RequestParam String name, @RequestParam(defaultValue = "Book") String type) {
         return ResponseEntity.ok(searchService.search(name, type));
     }

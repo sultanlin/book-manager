@@ -1,7 +1,7 @@
 package com.sultanlinjawi.library.services;
 
+import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.dto.BookSearch;
-import com.sultanlinjawi.library.models.Book;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class SearchService {
                     }
             } """;
 
-    public List<Book> search(String name, String type) {
+    public List<BookDto> search(String name, String type) {
         var booksSearched =
                 graphQlClient
                         .document(this.query)
@@ -34,10 +34,12 @@ public class SearchService {
                         .retrieveSync("search")
                         .toEntity(BookSearch.class);
 
-        return searchResultsToBooksList(booksSearched);
+        return searchResultsToBookDtoList(booksSearched);
     }
 
-    private List<Book> searchResultsToBooksList(BookSearch booksSearched) {
-        return booksSearched.results().hits().stream().map(bookHit -> Book.from(bookHit)).toList();
+    private List<BookDto> searchResultsToBookDtoList(BookSearch booksSearched) {
+        return booksSearched.results().hits().stream()
+                .map(bookHit -> BookDto.from(bookHit))
+                .toList();
     }
 }

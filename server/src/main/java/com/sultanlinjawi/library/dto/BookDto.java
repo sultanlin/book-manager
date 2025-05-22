@@ -1,38 +1,23 @@
-package com.sultanlinjawi.library.models;
+package com.sultanlinjawi.library.dto;
 
-import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import com.sultanlinjawi.library.models.Book;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-@Entity
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "book")
-public class Book {
-    @Id private int id;
-
-    @Column(nullable = false)
+public class BookDto {
+    private int id;
     private String title;
-
     private String author;
     private int pages;
     private BigDecimal rating;
@@ -43,11 +28,22 @@ public class Book {
     private String slug;
     private String subtitle;
 
-    @ManyToMany(mappedBy = "books")
-    private final Set<Shelf> shelves = new HashSet<>();
+    public static BookDto from(Book book) {
+        return new BookDto(
+                book.getId(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getPages(),
+                book.getRating(),
+                book.getRatingsCount(),
+                book.getCover(),
+                book.getDescription(),
+                book.getReleaseDate(),
+                book.getSlug(),
+                book.getSubtitle());
+    }
 
-    public static Book from(BookSearchHit hit) {
-        // TODO: Remove this if no longer using it (using BookDto.from(hit) instead)
+    public static BookDto from(BookSearchHit hit) {
         var document = hit.document();
         String author = null;
         String cover = null;
@@ -59,7 +55,7 @@ public class Book {
             author = document.author_names().get(0);
         }
 
-        return new Book(
+        return new BookDto(
                 document.id(),
                 document.title(),
                 author,
@@ -71,20 +67,5 @@ public class Book {
                 document.release_date(),
                 document.slug(),
                 document.subtitle());
-    }
-
-    public static Book from(BookDto bookDto) {
-        return new Book(
-                bookDto.getId(),
-                bookDto.getTitle(),
-                bookDto.getAuthor(),
-                bookDto.getPages(),
-                bookDto.getRating(),
-                bookDto.getRatingsCount(),
-                bookDto.getCover(),
-                bookDto.getDescription(),
-                bookDto.getReleaseDate(),
-                bookDto.getSlug(),
-                bookDto.getSubtitle());
     }
 }
