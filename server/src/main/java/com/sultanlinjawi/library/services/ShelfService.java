@@ -4,6 +4,8 @@ import com.sultanlinjawi.library.dto.ShelfDto;
 import com.sultanlinjawi.library.models.Shelf;
 import com.sultanlinjawi.library.repos.ShelfRepo;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +20,7 @@ import java.util.List;
 public class ShelfService {
     private final ShelfRepo shelfRepo;
     private final UserService userService;
+    private final BookService bookService;
 
     @Transactional
     public List<ShelfDto> getShelves(int userId) {
@@ -36,5 +39,18 @@ public class ShelfService {
             throw new IllegalArgumentException("Shelf with this name already exists for this user");
         }
         return ShelfDto.from(shelfRepo.save(shelf));
+    }
+
+    @Transactional
+    public Shelf getShelf(int shelfId, int userId) {
+        var shelf =
+                shelfRepo
+                        .findById(shelfId)
+                        .orElseThrow(() -> new EntityNotFoundException("Shelf does not exist"));
+        if (shelf.getOwner().getId() != userId) {
+            // TODO: Consider different exception
+            throw new EntityNotFoundException("Shelf does not exist for this user");
+        }
+        return shelf;
     }
 }

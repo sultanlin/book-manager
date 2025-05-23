@@ -10,6 +10,8 @@ import com.sultanlinjawi.library.models.Shelf;
 import com.sultanlinjawi.library.models.User;
 import com.sultanlinjawi.library.repos.ShelfRepo;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class ShelfServiceTests {
@@ -105,10 +108,59 @@ public class ShelfServiceTests {
         assertEquals(expected, actual);
     }
 
-    // deleteShelf
-    // Delete shelf that does not belong to user (error thrown and shelf not deleted)
+    @Test
+    @DisplayName("Get shelf(utility function), return shelf with matching id (happy ending)")
+    public void GetShelfUtilityHappyEnding() {
+        var userId = 1;
+        var shelfId = 10;
+        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        var shelf = Shelf.builder().id(shelfId).name("read now").owner(user).build();
 
-    // updateShelf
+        when(shelfRepo.findById(shelfId)).thenReturn(Optional.of(shelf));
+
+        var expected = shelf;
+        var actual = service.getShelf(shelfId, userId);
+
+        Assertions.assertThat(actual).isNotNull();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Get shelf(utility function), throw exception when shelf does not belong to user")
+    public void ThrowErrorWhenShelfDoesNotBelongToUser() {
+        var userId = 1;
+        var shelfId = 10;
+        var otherUser = User.builder().id(55).username("tester 1").password("pass").build();
+        var shelf = Shelf.builder().id(shelfId).name("read now").owner(otherUser).build();
+
+        when(shelfRepo.findById(shelfId)).thenReturn(Optional.of(shelf));
+
+        var expected = "Shelf does not exist for this user";
+        var actual =
+                assertThrows(EntityNotFoundException.class, () -> service.getShelf(shelfId, userId))
+                        .getMessage();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Get shelf(utility function), throw exception when no shelf exists with this id")
+    public void ThrowErrorWhenShelfDoesNotExist() {
+        var userId = 1;
+
+        when(shelfRepo.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        var expected = "Shelf does not exist";
+        var actual =
+                assertThrows(
+                                EntityNotFoundException.class,
+                                () -> {
+                                    service.getShelf(Mockito.anyInt(), userId);
+                                })
+                        .getMessage();
+
+        assertEquals(expected, actual);
+    }
 
     // getBooksFromShelf
     // addBookToShelf
