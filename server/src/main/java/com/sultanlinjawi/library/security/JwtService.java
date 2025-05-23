@@ -66,7 +66,6 @@ public class JwtService {
     }
 
     private String extractUsername(String token) {
-        // TODO: Handle jwt expiration exception
         var claims =
                 Jwts.parser()
                         .verifyWith(getSigningKey())

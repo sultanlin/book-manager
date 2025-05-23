@@ -37,10 +37,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                 userDetails, null, userDetails.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
-                if (userDetails instanceof UserDetailsImpl) {
-                    request.setAttribute("userId", ((UserDetailsImpl) userDetails).getId());
-                }
             }
         } catch (Exception e) {
             // Do not throw exceptions, just don't authenticate the user
