@@ -42,6 +42,25 @@ public class ShelfService {
     }
 
     @Transactional
+    public ShelfDto updateShelf(int shelfId, String shelfName, int userId) {
+        var shelf = getShelf(shelfId, userId);
+        shelf.setName(shelfName);
+        return ShelfDto.from(shelfRepo.save(shelf));
+    }
+
+    @Transactional
+    public void deleteShelf(int shelfId, int userId) {
+        var shelf = getShelf(shelfId, userId);
+        shelf.getBooks().stream()
+                .forEach(
+                        (book) -> {
+                            book.getShelves().remove(shelf);
+                            bookService.cleanup(book);
+                        });
+        shelfRepo.delete(shelf);
+    }
+
+    @Transactional
     public Shelf getShelf(int shelfId, int userId) {
         var shelf =
                 shelfRepo
