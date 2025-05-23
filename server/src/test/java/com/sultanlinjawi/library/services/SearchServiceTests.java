@@ -3,12 +3,12 @@ package com.sultanlinjawi.library.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.dto.BookSearch;
 import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults;
 import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit;
 import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument;
 import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument.BookSearchImage;
-import com.sultanlinjawi.library.models.Book;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -27,18 +27,16 @@ import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class SearchServiceTests {
-    // TODO: Consider testing FieldAccessException
-
     @Mock private HttpSyncGraphQlClient graphQlClient;
 
     @InjectMocks private SearchService service;
 
     @Test
-    @DisplayName("When searching for book, the response correctly returns a list of books")
+    @DisplayName("Searching book, response returns a list of books")
     public void GraphqlClientResponseReturnsListOfBooks() {
-        InitGraphqlClientMock(getBookSearchA());
+        setupGraphqlClientMock(getBookSearchA());
 
-        var expected = getBooksA();
+        var expected = getBookDtoA();
         var actual = service.search("spring+start+here", "Book");
 
         Assertions.assertThat(actual).isNotNull();
@@ -47,12 +45,11 @@ public class SearchServiceTests {
 
     @Test
     @DisplayName(
-            "When searching for book, correctly convert BookSearch dto to Book entity when fields"
-                    + " are null/empty")
+            "Searching book, no errors converting BookSearch to Book dto if fields are null/empty")
     public void NullFieldsDoesNotReturnError() {
-        InitGraphqlClientMock(getBookSearchB());
+        setupGraphqlClientMock(getBookSearchB());
 
-        var expected = getBooksB();
+        var expected = getBookDtoB();
         var actual = service.search("spring+start+here", "Book");
 
         Assertions.assertThat(actual).isNotNull();
@@ -60,9 +57,9 @@ public class SearchServiceTests {
     }
 
     @Test
-    @DisplayName("When searching for book, empty BookSearch gets converted to empty list of books")
+    @DisplayName("Searching book, empty BookSearch gets converted to empty list of books")
     public void EmptyBookSearchReturnsEmptyList() {
-        InitGraphqlClientMock(new BookSearch(new BookSearchResults(List.of())));
+        setupGraphqlClientMock(new BookSearch(new BookSearchResults(List.of())));
 
         var expected = List.of();
         var actual = service.search("spring+start+here", "Book");
@@ -71,18 +68,16 @@ public class SearchServiceTests {
         assertEquals(expected, actual);
     }
 
-    private void InitGraphqlClientMock(BookSearch bookSearch) {
+    private void setupGraphqlClientMock(BookSearch bookSearch) {
         var requestMock = Mockito.mock(GraphQlClient.RequestSpec.class);
-        var requestMockWithVariable = Mockito.mock(GraphQlClient.RequestSpec.class);
-        var requestMockWithBothVariables = Mockito.mock(GraphQlClient.RequestSpec.class);
         var retrieveMock = Mockito.mock(GraphQlClient.RetrieveSyncSpec.class);
 
         when(graphQlClient.document(Mockito.anyString())).thenReturn(requestMock);
         when(requestMock.variable(Mockito.anyString(), Mockito.anyString()))
-                .thenReturn(requestMockWithVariable);
-        when(requestMockWithVariable.variable(Mockito.anyString(), Mockito.anyString()))
-                .thenReturn(requestMockWithBothVariables);
-        when(requestMockWithBothVariables.retrieveSync("search")).thenReturn(retrieveMock);
+                .thenReturn(requestMock);
+        when(requestMock.variable(Mockito.anyString(), Mockito.anyString()))
+                .thenReturn(requestMock);
+        when(requestMock.retrieveSync("search")).thenReturn(retrieveMock);
         when(retrieveMock.toEntity(BookSearch.class)).thenReturn(bookSearch);
     }
 
@@ -133,19 +128,19 @@ public class SearchServiceTests {
                 .build();
     }
 
-    public List<Book> getBooksA() {
+    public List<BookDto> getBookDtoA() {
         return List.of(
-                Book.builder()
+                BookDto.builder()
                         .id(1049905)
                         .title("Spring Start Here: Learn what you need and learn it well")
                         .author("Laurentiu Spilca")
                         .description(null)
                         .pages(0)
                         .rating(BigDecimal.valueOf(0.0))
-                        .ratings_count(0)
+                        .ratingsCount(0)
                         .cover(
                                 "https://assets.hardcover.app/external_data/60220541/b7c22e914c405fe502e6baaf1efda3120d3b97db.jpeg")
-                        .release_date(null)
+                        .releaseDate(null)
                         .slug("spring-start-here")
                         .subtitle("Learn what you need and learn it well")
                         .build());
@@ -179,18 +174,18 @@ public class SearchServiceTests {
                 .build();
     }
 
-    public List<Book> getBooksB() {
+    public List<BookDto> getBookDtoB() {
         return List.of(
-                Book.builder()
+                BookDto.builder()
                         .id(0)
                         .title(null)
                         .author(null)
                         .description(null)
                         .pages(0)
                         .rating(null)
-                        .ratings_count(0)
+                        .ratingsCount(0)
                         .cover(null)
-                        .release_date(null)
+                        .releaseDate(null)
                         .slug(null)
                         .subtitle(null)
                         .build());
