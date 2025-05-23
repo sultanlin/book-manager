@@ -1,6 +1,8 @@
 package com.sultanlinjawi.library.services;
 
+import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.dto.ShelfDto;
+import com.sultanlinjawi.library.models.Book;
 import com.sultanlinjawi.library.models.Shelf;
 import com.sultanlinjawi.library.repos.ShelfRepo;
 
@@ -61,13 +63,49 @@ public class ShelfService {
     }
 
     @Transactional
+    public List<BookDto> getBooksFromShelf(int shelfId, int userId) {
+        var shelf = getShelf(shelfId, userId);
+        var booksInShelf = shelf.getBooks();
+
+        return booksInShelf.stream().map(book -> BookDto.from(book)).toList();
+    }
+
+    @Transactional
+    public List<BookDto> addBookToShelf(int shelfId, BookDto bookDto, int userId) {
+        var shelf = getShelf(shelfId, userId);
+        var booksInShelf = shelf.getBooks();
+        var requestedBook = Book.from(bookDto);
+
+        bookService.add(requestedBook);
+
+        booksInShelf.add(requestedBook);
+        shelfRepo.save(shelf);
+
+        return booksInShelf.stream().map(book -> BookDto.from(book)).toList();
+    }
+
+    @Transactional
+    public void removeBookFromShelf(int shelfId, int bookId, int userId) {
+        var shelf = getShelf(shelfId, userId);
+        var book = bookService.getBook(bookId);
+
+        var bookRemoved = shelf.getBooks().remove(book);
+
+        if (!bookRemoved) {
+            throw new EntityNotFoundException("Shelf does not contain this book");
+        }
+
+        bookService.cleanup(book);
+        shelfRepo.save(shelf);
+    }
+
+    @Transactional
     public Shelf getShelf(int shelfId, int userId) {
         var shelf =
                 shelfRepo
                         .findById(shelfId)
                         .orElseThrow(() -> new EntityNotFoundException("Shelf does not exist"));
         if (shelf.getOwner().getId() != userId) {
-            // TODO: Consider different exception
             throw new EntityNotFoundException("Shelf does not exist for this user");
         }
         return shelf;
