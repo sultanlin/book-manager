@@ -25,4 +25,10 @@ public class BookService {
     public Book add(Book book) {
         return bookRepo.save(book);
     }
+
+    public void cleanup(Book book) {
+        if (book.getShelves().isEmpty()) {
+            bookRepo.delete(book);
+        }
+    }
 }
