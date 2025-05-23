@@ -23,8 +23,7 @@ public class ShelfService {
     public List<ShelfDto> getShelves(int userId) {
         var user = userService.getUserById(userId);
         var shelves = user.getShelves();
-        var shelvesDto = shelves.stream().map((shelf) -> ShelfDto.from(shelf)).toList();
-        return shelvesDto;
+        return shelves.stream().map((shelf) -> ShelfDto.from(shelf)).toList();
     }
 
     @Transactional

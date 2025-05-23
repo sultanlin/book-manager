@@ -19,6 +19,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 @ExtendWith(MockitoExtension.class)
 public class ShelfServiceTests {
     @Mock private ShelfRepo shelfRepo;
@@ -69,7 +71,39 @@ public class ShelfServiceTests {
         assertEquals(expected, actual);
     }
 
-    // getShelf
+    @Test
+    @DisplayName("Get all shelves, returns all shelves from user (happy ending)")
+    public void GetShelvesHappyEnding() {
+        var userId = 1;
+        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        var shelf = Shelf.builder().name("Test Shelf").owner(user).build();
+        var shelf2 = Shelf.builder().name("different name").owner(user).build();
+        user.getShelves().add(shelf);
+        user.getShelves().add(shelf2);
+
+        when(userService.getUserById(userId)).thenReturn(user);
+
+        var expected = List.of(ShelfDto.from(shelf), ShelfDto.from(shelf2));
+        var actual = service.getShelves(userId);
+
+        Assertions.assertThat(actual).isNotNull();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Get all shelves, empty list when user has no shelves")
+    public void ReturnEmptyListIfUserHasNoShelves() {
+        var userId = 1;
+        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+
+        when(userService.getUserById(userId)).thenReturn(user);
+
+        var expected = List.of();
+        var actual = service.getShelves(userId);
+
+        Assertions.assertThat(actual).isNotNull();
+        assertEquals(expected, actual);
+    }
 
     // deleteShelf
     // Delete shelf that does not belong to user (error thrown and shelf not deleted)
