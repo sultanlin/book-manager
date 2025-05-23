@@ -65,28 +65,25 @@ public class ShelfController {
     public ResponseEntity<List<BookDto>> getBooksFromShelf(
             @PathVariable int shelfId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         var userId = userDetails.getId();
-        var books = shelfService.getBooksFromShelf(shelfId, userId);
-        return ResponseEntity.ok(books);
+        return ResponseEntity.ok(shelfService.getBooksFromShelf(shelfId, userId));
     }
 
     @PostMapping("/{shelfId}/books")
     public ResponseEntity<List<BookDto>> addBookToShelf(
-            // TODO: Set return to be list of books (all books for this shelf)
             @PathVariable int shelfId,
             @RequestBody BookDto bookDto,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         var userId = userDetails.getId();
-        var books = shelfService.addBookToShelf(shelfId, bookDto, userId);
-        return new ResponseEntity<>(books, HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                shelfService.addBookToShelf(shelfId, bookDto, userId), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{shelfId}/books/{bookId}")
-    public ResponseEntity<Void> removeBookFromShelf(
+    public ResponseEntity<List<BookDto>> removeBookFromShelf(
             @PathVariable int shelfId,
             @PathVariable int bookId,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         var userId = userDetails.getId();
-        shelfService.removeBookFromShelf(shelfId, bookId, userId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(shelfService.removeBookFromShelf(shelfId, bookId, userId));
     }
 }

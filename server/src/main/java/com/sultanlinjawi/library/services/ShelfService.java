@@ -85,18 +85,22 @@ public class ShelfService {
     }
 
     @Transactional
-    public void removeBookFromShelf(int shelfId, int bookId, int userId) {
+    public List<BookDto> removeBookFromShelf(int shelfId, int bookId, int userId) {
         var shelf = getShelf(shelfId, userId);
-        var book = bookService.getBook(bookId);
+        var bookToDelete = bookService.getBook(bookId);
 
-        var bookRemoved = shelf.getBooks().remove(book);
+        var bookRemoved = shelf.getBooks().remove(bookToDelete);
 
         if (!bookRemoved) {
             throw new EntityNotFoundException("Shelf does not contain this book");
         }
 
-        bookService.cleanup(book);
         shelfRepo.save(shelf);
+
+        bookToDelete.getShelves().remove(shelf);
+        bookService.cleanup(bookToDelete);
+
+        return shelf.getBooks().stream().map(book -> BookDto.from(book)).toList();
     }
 
     @Transactional
