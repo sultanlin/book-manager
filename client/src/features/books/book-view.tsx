@@ -1,6 +1,6 @@
 import { BookMetadata } from "@/types/BookMetadata"
 
-function Book({ book }: { book: BookMetadata }) {
+function BookView({ book }: { book: BookMetadata }) {
   return (
     <article className="book">
       <img src={book.cover} className="cover" alt="book cover" />
@@ -10,4 +10,4 @@ function Book({ book }: { book: BookMetadata }) {
   )
 }
 
-export default Book
+export default BookView
