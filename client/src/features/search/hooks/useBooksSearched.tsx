@@ -1,5 +1,5 @@
 import searchBooks from "@/api/search"
-import BookMetadata from "@/types/BookProps"
+import { BookMetadata } from "@/types/BookMetadata"
 import { useEffect } from "react"
 
 export default function useBooksSearched(

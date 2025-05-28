@@ -2,7 +2,7 @@ import BookList from "@/features/books"
 import { Logo, UserCard } from "@/features/header"
 import useBooksSearched, { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
-import BookMetadata from "@/types/BookProps"
+import { BookMetadata } from "@/types/BookMetadata"
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 

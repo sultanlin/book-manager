@@ -1,5 +1,5 @@
 import Book from "@/features/books/book"
-import BookMetadata from "@/types/BookProps"
+import { BookMetadata } from "@/types/BookMetadata"
 import { ReactNode } from "react"
 
 function BookList({ booksList }: { booksList: BookMetadata[] }): ReactNode {

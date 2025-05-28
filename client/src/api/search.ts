@@ -1,10 +1,9 @@
-import BookMetadata from "@/types/BookProps"
+import { BookMetadata } from "@/types/BookMetadata"
 
 export default async function searchBooks(
   bookName: string,
   queryType: string = "book",
 ): Promise<BookMetadata[]> {
-  const books: BookMetadata[] = []
   let typeParam = ""
   if (queryType) {
     typeParam = `type=${queryType}`
@@ -15,23 +14,7 @@ export default async function searchBooks(
   const response = await fetch(
     "http://192.168.1.44:8080/api/v1/search" + queryParams,
   )
-  const data = await response.json()
-
-  data.results.hits.map(
-    (hit: {
-      document: {
-        author_names: [string]
-        title: string
-        image: { url: string }
-      }
-    }) => {
-      books.push({
-        author: hit.document.author_names[0],
-        name: hit.document.title,
-        cover: hit.document.image.url,
-      })
-    },
-  )
+  const books = await response.json()
 
   return books
 }
