@@ -1,7 +1,8 @@
-import { AuthenticatedUser } from "@/types/AuthenticatedUser"
+import { Shelf } from "@/types/api"
+import { User } from "@/types/api"
 import { create } from "zustand"
 
-type UserStore = AuthenticatedUser & {
+type UserStore = User & {
   assignTemporaryToken: () => void
 }
 

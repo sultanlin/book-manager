@@ -1,10 +1,10 @@
 import { useGlobalStore } from "@/stores/store"
-import { BookMetadata } from "@/types/BookMetadata"
+import { Book } from "@/types/api"
 
 export default async function searchBooks(
   bookName: string,
   queryType: string = "book",
-): Promise<BookMetadata[]> {
+): Promise<Book[]> {
   let typeParam = ""
   if (queryType) {
     typeParam = `type=${queryType}`

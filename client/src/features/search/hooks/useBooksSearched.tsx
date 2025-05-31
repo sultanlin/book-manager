@@ -1,9 +1,9 @@
 import searchBooks from "@/api/search"
-import { BookMetadata } from "@/types/BookMetadata"
+import { Book } from "@/types/api"
 import { useEffect } from "react"
 
 export default function useBooksSearched(
-  setBooks: React.Dispatch<React.SetStateAction<BookMetadata[]>>,
+  setBooks: React.Dispatch<React.SetStateAction<Book[]>>,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   search: string,
 ): void {

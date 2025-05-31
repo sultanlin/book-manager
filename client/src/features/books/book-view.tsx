@@ -1,6 +1,6 @@
-import { BookMetadata } from "@/types/BookMetadata"
+import { Book } from "@/types/api"
 
-function BookView({ book }: { book: BookMetadata }) {
+function BookView({ book }: { book: Book }) {
   return (
     <article className="book">
       <img src={book.cover} className="cover" alt="book cover" />

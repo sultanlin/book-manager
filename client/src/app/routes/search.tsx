@@ -1,6 +1,6 @@
 import BookList from "@/features/books"
 import useBooksSearched from "@/features/search"
-import { BookMetadata } from "@/types/BookMetadata"
+import { Book } from "@/types/api"
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
@@ -9,7 +9,7 @@ function Search() {
   const [searchParams] = useSearchParams()
   const search = searchParams.get("search") || ""
   console.log(search)
-  const [books, setBooks] = useState<BookMetadata[]>([])
+  const [books, setBooks] = useState<Book[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   useBooksSearched(setBooks, setLoading, search)
 
