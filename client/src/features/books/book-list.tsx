@@ -4,13 +4,7 @@ import BookView from "./book-view"
 
 function BookList({ booksList }: { booksList: BookMetadata[] }): ReactNode {
   // FIX: Add keys to list
-  return (
-    <main className="content">
-      {booksList.map((b) => (
-        <BookView book={b} />
-      ))}
-    </main>
-  )
+  return booksList.map((b) => <BookView book={b} />)
 }
 
 export default BookList
