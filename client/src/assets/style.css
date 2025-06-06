@@ -27,7 +27,7 @@ body {
   grid-template-areas:
     "header header"
     "sidebar content";
-  grid-template-columns: 1fr 6fr;
+  grid-template-columns: 1fr 8fr;
   grid-template-rows: auto 1fr;
 }
 
@@ -89,7 +89,7 @@ header.header {
 nav.header {
   display: grid;
   padding: 1.5rem 2rem;
-  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-columns: 1fr 7fr 1fr;
   align-items: center;
   gap: 10rem;
   background-color: var(--secondary);
