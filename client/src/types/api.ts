@@ -22,3 +22,12 @@ export type Shelf = {
   id: number
   name: string
 }
+
+export type LoginCredentials = {
+  username: string
+  password: string
+}
+
+export type SignupCredentials = LoginCredentials & {
+  passwordConfirmation: string
+}

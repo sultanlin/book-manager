@@ -180,3 +180,65 @@ body {
 .book .name {
   font-size: 1.2rem;
 }
+
+main.login {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: burlywood;
+}
+/* grid makes all of the inputs ontop of eachother */
+main.login > div {
+  display: grid;
+  /* padding: 0 2rem 5rem; */
+  /* place-items: center; */
+  gap: 2rem;
+  background-color: white;
+}
+
+.login {
+  font-size: 1.8rem;
+}
+
+.login button {
+  width: 100%;
+}
+
+.login {
+  background-color: red;
+}
+
+.login form {
+  display: grid;
+  gap: 3rem;
+  padding: 0 2rem 5rem;
+}
+
+/* form inputs with label */
+.login form > div {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.login nav {
+  display: flex;
+  background-color: lightsalmon;
+}
+
+.login a {
+  text-align: center;
+  flex: 1;
+  padding: 2rem;
+  border: 1px solid white;
+  font-weight: bolder;
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.login input {
+  font-size: 2.2rem;
+}
+
+.login .error {
+  color: red;
+}
