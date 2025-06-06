@@ -181,6 +181,8 @@ body {
   font-size: 1.2rem;
 }
 
+/* login / register */
+
 main.auth {
   display: grid;
   place-items: center;
