@@ -106,7 +106,6 @@ nav.header {
 }
 
 .usercard {
-  margin-left: auto;
   display: flex;
   gap: 0.6rem;
   align-items: center;
@@ -118,11 +117,12 @@ nav.header {
 }
 
 .searchbar {
+  background-color: lemonchiffon;
   display: flex;
   align-items: center;
   border-radius: 1rem;
   border: 1px darkgray solid;
-  width: 25rem;
+  width: clamp(10rem, 100%, 40rem);
 }
 
 .searchbar input {
@@ -138,29 +138,10 @@ nav.header {
 }
 
 .searchbar .icon {
-  color: red;
+  color: brown;
   padding: 10;
+  font-size: 2rem;
   margin-right: 0.3rem;
-}
-
-.search {
-  display: flex;
-  align-items: center;
-}
-
-.search select {
-  /* display: none; */
-  /* background-color: DodgerBlue; */
-  color: black;
-  padding: 8px 16px;
-  /* border: 1px solid transparent; */
-  /* border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent; */
-  border: 1px black solid;
-  cursor: pointer;
-}
-
-.hide {
-  display: none;
 }
 
 /* Book Styles */
@@ -183,6 +164,7 @@ nav.header {
   font-family: var(--mono);
 }
 
+/* TODO: Make it bigger than author */
 .book .name {
   font-size: 1.2rem;
 }
