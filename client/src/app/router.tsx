@@ -1,25 +1,28 @@
-import { createBrowserRouter, redirect } from "react-router-dom"
+import { createBrowserRouter } from "react-router-dom"
 import Login from "@/app/routes/login"
-import { useGlobalStore } from "@/stores/store"
-import ContentLayout from "@/app/routes/content-layout"
 import Search from "@/app/routes/search"
-
-async function requireAuth() {
-  const token = useGlobalStore.getState().token
-  if (!token) {
-    return redirect("/login")
-  }
-  return null
-}
+import { loginAction, registerAction, requireAuth } from "@/features/auth"
+import AuthLayout from "@/components/layouts/auth-layout"
+import Register from "./routes/register"
+import ContentLayout from "@/components/layouts/content-layout"
 
 export const router = createBrowserRouter([
   {
-    path: "/login",
-    element: <Login />,
-    // action: Logic for processing login form, put redirect to previous route here
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+        action: loginAction,
+      },
+      {
+        path: "register",
+        element: <Register />,
+        action: registerAction,
+      },
+    ],
   },
   {
-    // TODO: Change ProtectedRoute name (aka ProtectedLayout)
     element: <ContentLayout />,
     loader: requireAuth,
     children: [

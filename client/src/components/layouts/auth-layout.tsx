@@ -5,10 +5,11 @@ function AuthLayout() {
   const params = redirectTo ? `?redirectTo=${redirectTo}` : ""
 
   return (
-    <main className="login">
+    <main className="auth">
       <div>
         <nav>
           <NavLink to={"/login" + params}>Sign in</NavLink>
+          <NavLink to={"/register" + params}>Sign up</NavLink>
         </nav>
         <Outlet />
       </div>

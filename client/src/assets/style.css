@@ -181,14 +181,14 @@ body {
   font-size: 1.2rem;
 }
 
-main.login {
+main.auth {
   display: grid;
   place-items: center;
   height: 100vh;
   background-color: burlywood;
 }
 /* grid makes all of the inputs ontop of eachother */
-main.login > div {
+main.auth > div {
   display: grid;
   /* padding: 0 2rem 5rem; */
   /* place-items: center; */
@@ -196,36 +196,36 @@ main.login > div {
   background-color: white;
 }
 
-.login {
+.auth {
   font-size: 1.8rem;
 }
 
-.login button {
+.auth button {
   width: 100%;
 }
 
-.login {
+.auth {
   background-color: red;
 }
 
-.login form {
+.auth form {
   display: grid;
   gap: 3rem;
   padding: 0 2rem 5rem;
 }
 
 /* form inputs with label */
-.login form > div {
+.auth form > div {
   display: grid;
   gap: 0.6rem;
 }
 
-.login nav {
+.auth nav {
   display: flex;
   background-color: lightsalmon;
 }
 
-.login a {
+.auth a {
   text-align: center;
   flex: 1;
   padding: 2rem;
@@ -235,10 +235,10 @@ main.login > div {
   color: inherit;
 }
 
-.login input {
+.auth input {
   font-size: 2.2rem;
 }
 
-.login .error {
+.auth .error {
   color: red;
 }

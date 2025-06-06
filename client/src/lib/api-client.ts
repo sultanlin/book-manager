@@ -1,4 +1,4 @@
-import { useGlobalStore } from "@/stores/store"
+import { useUserStore } from "@/stores/store"
 import Axios from "axios"
 
 export const axiosInstance = Axios.create({
@@ -10,7 +10,7 @@ export const axiosInstance = Axios.create({
 
 axiosInstance.interceptors.request.use(
   (request) => {
-    const accessToken = useGlobalStore.getState().token
+    const accessToken = useUserStore.getState().token
 
     if (accessToken) {
       request.headers["Authorization"] = `Bearer ${accessToken}`

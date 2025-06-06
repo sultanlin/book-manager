@@ -1,18 +1,23 @@
-import { Shelf } from "@/types/api"
 import { User } from "@/types/api"
 import { create } from "zustand"
 
 type UserStore = User & {
-  assignTemporaryToken: () => void
+  assignToken: (token: string) => void
+  assignUsername: (username: string) => void
+  logout: () => void
 }
 
-export const useGlobalStore = create<UserStore>((set) => ({
+// TODO: Change name to useAuthStore
+export const useUserStore = create<UserStore>((set) => ({
   username: "",
   token: "",
-  assignTemporaryToken: () => {
-    set(() => ({
-      token:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWx0YW4yIiwiaWF0IjoxNzQ4Njc5MDQ5LCJleHAiOjE3NDg3NjU0NDl9.Q3u2UMncnIDEawRejRe64kxeApQs9tXBz6yhoyJuahE",
-    }))
+  assignToken: (token: string) => {
+    set(() => ({ token: token }))
+  },
+  assignUsername: (username: string) => {
+    set(() => ({ username: username }))
+  },
+  logout: () => {
+    set(() => ({ username: "", token: "" }))
   },
 }))
