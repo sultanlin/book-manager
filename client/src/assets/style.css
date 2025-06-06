@@ -31,7 +31,7 @@ body {
   grid-template-rows: auto 1fr;
 }
 
-.header {
+header.header {
   grid-area: header;
 }
 .sidebar {
@@ -39,14 +39,6 @@ body {
 }
 .content {
   grid-area: content;
-}
-
-.header {
-  display: flex;
-  padding: 1.5rem 2rem;
-  align-items: center;
-  gap: 10rem;
-  background-color: var(--secondary);
 }
 
 .content {
@@ -60,9 +52,7 @@ body {
   overflow: auto;
 }
 
-.book {
-  background-color: var(--light);
-}
+/* Sidebar Navbar Styles */
 
 .sidebar {
   background-color: var(--dark);
@@ -93,6 +83,16 @@ body {
   max-width: 9ch;
   font-size: 1.4rem;
   line-height: 1.2;
+}
+
+/* Header Styles */
+
+.header {
+  display: flex;
+  padding: 1.5rem 2rem;
+  align-items: center;
+  gap: 10rem;
+  background-color: var(--secondary);
 }
 
 .logo {
@@ -162,6 +162,11 @@ body {
   display: none;
 }
 
+/* Book Styles */
+.book {
+  background-color: var(--light);
+}
+
 .book .cover {
   object-fit: fill;
   width: 100%;
@@ -181,7 +186,7 @@ body {
   font-size: 1.2rem;
 }
 
-/* login / register */
+/* Authentication Styles */
 
 main.auth {
   display: grid;
