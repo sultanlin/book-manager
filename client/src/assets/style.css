@@ -86,10 +86,10 @@ header.header {
 }
 
 /* Header Styles */
-nav.header {
+.header {
   display: grid;
-  padding: 1.5rem 2rem;
-  grid-template-columns: 1fr 7fr 1fr;
+  padding: 1rem;
+  grid-template-columns: 1fr 7fr auto;
   align-items: center;
   gap: 10rem;
   background-color: var(--secondary);
@@ -99,6 +99,16 @@ nav.header {
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-self: center;
+  cursor: pointer;
+  background: inherit;
+  color: inherit;
+  text-decoration: inherit;
+  border: none;
+}
+
+.logo .icon {
+  font-size: 3rem;
 }
 
 .logo h1 {

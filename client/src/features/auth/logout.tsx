@@ -5,11 +5,9 @@ import { Link } from "react-router-dom"
 function LogoutButton() {
   const logout = useUserStore((state) => state.logout)
   return (
-    <Link to={"/login"}>
-      <button type="button" onClick={() => logout}>
-        <Logout />
-        logout
-      </button>
+    <Link to={"/login"} onClick={() => logout()} className="logout">
+      <Logout />
+      logout
     </Link>
   )
 }

@@ -1,10 +1,11 @@
-import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft"
+import { LocalLibraryRounded } from "@mui/icons-material"
+import { Link } from "react-router-dom"
 function Logo() {
   return (
-    <div className="logo">
-      <AlignHorizontalLeftIcon color="primary" sx={{ fontSize: 30 }} />
-      <h1>Bookshelf</h1>
-    </div>
+    <Link to={"/search"} className="logo">
+      <LocalLibraryRounded className="icon" />
+      <h1>Library</h1>
+    </Link>
   )
 }
 
