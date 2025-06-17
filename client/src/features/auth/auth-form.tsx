@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { useFetcher, useSearchParams } from "react-router-dom"
+import { useFetcher, useSearchParams } from "react-router"
 
 type AuthFormProps = {
   children: ReactNode

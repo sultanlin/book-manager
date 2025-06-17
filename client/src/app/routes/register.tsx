@@ -1,5 +1,10 @@
 import TextInput from "@/components/text-input"
-import { AuthForm } from "@/features/auth"
+import { AuthForm, registerAction } from "@/features/auth"
+import { ActionFunctionArgs } from "react-router"
+
+export async function clientAction(actionArgs: ActionFunctionArgs) {
+  return registerAction(actionArgs)
+}
 
 function Register() {
   return (

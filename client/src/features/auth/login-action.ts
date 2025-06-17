@@ -1,7 +1,7 @@
 import login from "@/api/login"
 import { useUserStore } from "@/stores/store"
 import { AxiosError } from "axios"
-import { ActionFunctionArgs, redirect } from "react-router-dom"
+import { ActionFunctionArgs, redirect } from "react-router"
 
 export default async function loginAction({ request }: ActionFunctionArgs) {
   const formData = await request.formData()

@@ -1,7 +1,7 @@
 import searchBooks from "@/api/search"
 import BookList from "@/features/books"
 import { useQuery } from "@tanstack/react-query"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router"
 
 function Search() {
   const [searchParams] = useSearchParams()

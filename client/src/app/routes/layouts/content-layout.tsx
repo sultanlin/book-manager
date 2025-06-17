@@ -1,8 +1,13 @@
+import { requireAuth } from "@/features/auth"
 import { Logo, UserCard } from "@/features/header"
 import { SearchBar } from "@/features/search"
 import Sidebar from "@/features/sidebar"
+import { LoaderFunctionArgs } from "react-router"
+import { Outlet } from "react-router"
 
-import { Outlet } from "react-router-dom"
+export async function clientLoader(loaderArgs: LoaderFunctionArgs) {
+  return requireAuth(loaderArgs)
+}
 
 function ContentLayout() {
   return (

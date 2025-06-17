@@ -1,5 +1,5 @@
 import { LocalLibraryRounded } from "@mui/icons-material"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 function Logo() {
   return (
     <Link to={"/search"} className="logo">

@@ -1,6 +1,6 @@
 import { useUserStore } from "@/stores/store"
 import { Logout } from "@mui/icons-material"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 function LogoutButton() {
   const logout = useUserStore((state) => state.logout)

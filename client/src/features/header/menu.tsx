@@ -1,5 +1,5 @@
 import { Settings } from "@mui/icons-material"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import LogoutButton from "@/features/auth/logout"
 
 function Menu() {

@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useSearchParams } from "react-router-dom"
+import { NavLink, Outlet, useSearchParams } from "react-router"
 function AuthLayout() {
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get("redirectTo") || "/search"

@@ -1,5 +1,5 @@
 import { useUserStore } from "@/stores/store"
-import { LoaderFunctionArgs, redirect } from "react-router-dom"
+import { LoaderFunctionArgs, redirect } from "react-router"
 
 export default async function requireAuth({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url)
