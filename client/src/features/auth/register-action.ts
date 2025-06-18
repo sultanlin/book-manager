@@ -1,4 +1,4 @@
-import register from "@/api/register"
+import register from "@/features/auth/api/register"
 import { useUserStore } from "@/stores/store"
 import { AxiosError } from "axios"
 import { ActionFunctionArgs, redirect } from "react-router"

@@ -1,4 +1,4 @@
-import login from "@/api/login"
+import login from "@/features/auth/api/login"
 import { useUserStore } from "@/stores/store"
 import { AxiosError } from "axios"
 import { ActionFunctionArgs, redirect } from "react-router"

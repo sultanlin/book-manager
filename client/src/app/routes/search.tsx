@@ -1,4 +1,4 @@
-import searchBooks from "@/api/search"
+import searchBooks from "@/features/search/api/search"
 import BookList from "@/features/books"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router"
