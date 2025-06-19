@@ -27,7 +27,7 @@ body {
   grid-template-areas:
     "header header"
     "sidebar content";
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: 1fr 6fr;
   grid-template-rows: auto 1fr;
 }
 
@@ -56,27 +56,40 @@ header.header {
 
 .sidebar {
   background-color: var(--dark);
+  overflow: hidden;
+  padding-top: 1rem;
+  font-size: 1.7rem;
+}
+
+/* Shelf Styles */
+.shelves {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.6rem;
+  list-style-type: none;
+  padding: 0;
 }
 
-.sidebar .button {
-  display: block;
-  padding: 0 1rem;
+.shelf {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem 1rem 0;
   color: var(--lightest);
   text-align: center;
-  text-decoration: none;
-  font-style: none;
+  text-decoration: inherit;
+  font-style: inherit;
 }
 
-.sidebar .button:first-of-type {
-  padding-top: 2rem;
+.shelf > p {
+  line-height: 1.2;
+  font-size: clamp(1.4rem, 1.8vw, 2rem);
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
 }
 
-.sidebar .current {
-  border-left: green 0.5rem solid;
-  background-color: var(--secondary);
+.shelf > .icon {
+  font-size: 2.2rem;
 }
 
 .sidebar p {
