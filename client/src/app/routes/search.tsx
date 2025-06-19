@@ -1,16 +1,12 @@
-import searchBooks from "@/features/search/api/search"
+import { useSearch } from "@/features/search"
 import BookList from "@/features/books"
-import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router"
 
 function Search() {
   const [searchParams] = useSearchParams()
   const bookName = searchParams.get("search") || ""
 
-  const { data, isLoading, isFetching, isPending, error } = useQuery({
-    queryKey: ["search", bookName],
-    queryFn: () => searchBooks(bookName),
-  })
+  const { data, isLoading, isFetching, isPending, error } = useSearch(bookName)
 
   if (isLoading) return "Getting books, please wait a moment..." // what is isLoading?!?!?
   if (error) return "An error has occured: " + error.message
