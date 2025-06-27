@@ -8,5 +8,6 @@ export default [
   // TODO: add errorboundary
   layout("./routes/layouts/content-layout.tsx", [
     route("search", "./routes/search.tsx"),
+    route("shelves/:shelfId", "./routes/shelves.tsx"),
   ]),
 ] satisfies RouteConfig

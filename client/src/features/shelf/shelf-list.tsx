@@ -1,7 +1,8 @@
 import ShelfView from "./shelf-view"
-import { useShelves } from "./api/getShelves"
+import { useShelves } from "./api/get-shelves"
 
 function ShelfList() {
+  // TODO: set loading screen
   const { data, isLoading, isFetching, isPending, error } = useShelves()
 
   return (
