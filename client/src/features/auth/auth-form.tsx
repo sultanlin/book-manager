@@ -25,6 +25,7 @@ function AuthForm({
 
   const navigation = useNavigation()
   const isPending = navigation.state === "submitting"
+  // TODO: Move pending to button only (set all inputs and button to grey)
 
   return isPending ? (
     <p>{pendingMessage}</p>

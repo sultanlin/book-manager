@@ -4,6 +4,7 @@ function AuthLayout() {
   const redirectTo = searchParams.get("redirectTo") || "/search"
   const params = redirectTo ? `?redirectTo=${redirectTo}` : ""
 
+  /* TODO: Add a picture to the left of the form, half the page is pic half is form */
   return (
     <main className="auth">
       <div>
