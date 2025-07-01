@@ -1,38 +1,30 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import Menu from "./menu"
 
 function UserCard() {
-  const [open, setOpen] = useState(false)
-
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDialogElement>(null)
 
   const triggerMenu = () => {
-    setOpen(!open)
+    if (!menuRef.current) return
+
+    const currRef = menuRef.current
+
+    if (currRef.hasAttribute("open")) currRef.close()
+    else currRef.showModal()
   }
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener("click", handler)
-
-    return () => {
-      document.removeEventListener("click", handler)
-    }
-  }, [dropdownRef])
-
   return (
-    <div className="usercard" ref={dropdownRef}>
+    <div className="usercard">
       <button onClick={triggerMenu}>
         <AccountCircleIcon className="icon" />
       </button>
-      {open && <Menu />}
+      <dialog
+        ref={menuRef}
+        onClick={(e) => (e.currentTarget === e.target ? triggerMenu() : null)}
+      >
+        <Menu />
+      </dialog>
     </div>
   )
 }
