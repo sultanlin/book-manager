@@ -1,5 +1,6 @@
 package com.sultanlinjawi.library.services;
 
+import com.sultanlinjawi.library.dto.ShelfDto;
 import com.sultanlinjawi.library.models.Book;
 import com.sultanlinjawi.library.repos.BookRepo;
 
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,5 +33,13 @@ public class BookService {
         if (book.getShelves().isEmpty()) {
             bookRepo.delete(book);
         }
+    }
+
+    public List<ShelfDto> getBookShelves(int bookId, int userId) {
+        var book = getBook(bookId);
+        return book.getShelves().stream()
+                .filter(shelf -> shelf.getOwner().getId() == userId)
+                .map(shelf -> ShelfDto.from(shelf))
+                .toList();
     }
 }

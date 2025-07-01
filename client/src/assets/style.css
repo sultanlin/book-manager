@@ -215,8 +215,6 @@ header.header {
   margin-right: 0.3rem;
 }
 
-/* Book Styles */
-
 .books {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
