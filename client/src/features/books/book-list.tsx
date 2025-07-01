@@ -6,7 +6,13 @@ type BookListProps = {
 }
 
 function BookList({ booksList }: BookListProps) {
-  return booksList.map((book) => <BookView book={book} key={book.id} />)
+  return (
+    <div className="books">
+      {booksList.map((book) => (
+        <BookView book={book} key={book.id} />
+      ))}
+    </div>
+  )
 }
 
 export default BookList

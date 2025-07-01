@@ -214,24 +214,34 @@ header.header {
 }
 
 /* Book Styles */
-.book {
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  padding: 2rem 5rem;
+  grid-auto-rows: max-content;
+  gap: 2rem;
+  overflow: auto;
+}
+
+.book-card {
   background-color: var(--book-bkgr);
   border: 2px solid var(--border);
 }
 
-.book > a {
+.book-card > a {
   color: var(--text);
   text-decoration: inherit;
   font-style: inherit;
 }
 
-.book .cover {
+.book-card .cover {
   object-fit: fill;
   width: 100%;
   height: 20rem;
 }
 
-.book p {
+.book-card p {
   margin: 0.1rem 0.3rem;
   line-height: 1.3;
   text-overflow: ellipsis;
@@ -240,7 +250,7 @@ header.header {
   font-family: var(--mono);
 }
 
-.book .name {
+.book-card .name {
   font-size: 1.2rem;
 }
 
