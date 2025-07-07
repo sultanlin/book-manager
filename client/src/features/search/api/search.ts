@@ -12,7 +12,10 @@ export async function searchBooks(
       type: queryType,
     },
   })
-  return response.data
+  return response.data.map(({ releaseDate, ...rest }) => ({
+    ...rest,
+    releaseDate: new Date(releaseDate),
+  }))
 }
 
 export const getSearchQueryOptions = (bookName: string) => {

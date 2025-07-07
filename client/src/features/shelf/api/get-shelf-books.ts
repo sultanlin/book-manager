@@ -6,7 +6,10 @@ export async function getShelfBooks(shelfId: number): Promise<Book[]> {
   const response = await axiosInstance.get<Book[]>(
     `/api/v1/shelves/${shelfId}/books`
   )
-  return response.data
+  return response.data.map(({ releaseDate, ...rest }) => ({
+    ...rest,
+    releaseDate: new Date(releaseDate),
+  }))
 }
 
 export const getShelfBooksQueryOptions = (shelfId: number) => {
