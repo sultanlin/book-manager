@@ -1,5 +1,5 @@
 import { useSearch } from "@/features/search"
-import BookList from "@/features/books"
+import { BookList } from "@/features/books"
 import { useSearchParams } from "react-router"
 
 function Search() {

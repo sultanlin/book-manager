@@ -7,7 +7,7 @@ type BookListProps = {
 
 function BookList({ booksList }: BookListProps) {
   return (
-    <div className="books">
+    <div className="book-cards">
       {booksList.map((book) => (
         <BookView book={book} key={book.id} />
       ))}

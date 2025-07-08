@@ -48,6 +48,7 @@ header.header {
 .content {
   grid-area: content;
   background-color: var(--primary);
+  overflow: auto;
 }
 
 /* Sidebar Navbar Styles */
@@ -91,6 +92,7 @@ header.header {
 }
 
 .shelf > .icon {
+  color: var(--text);
   font-size: 2.2rem;
 }
 
@@ -119,10 +121,12 @@ header.header {
 }
 
 .logo .icon {
+  color: var(--text);
   font-size: 3rem;
 }
 
 .logo h1 {
+  color: var(--text);
   font-size: 2.4rem;
 }
 
@@ -138,6 +142,7 @@ header.header {
 }
 
 .usercard .icon {
+  color: var(--text);
   font-size: 3.4rem;
 }
 
@@ -215,13 +220,13 @@ header.header {
   margin-right: 0.3rem;
 }
 
-.books {
+/* Book Cards Styles */
+.book-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
   padding: 2rem 5rem;
   grid-auto-rows: max-content;
   gap: 2rem;
-  overflow: auto;
 }
 
 .book-card {
@@ -327,4 +332,80 @@ header.header {
 
 .auth .error {
   color: hsl(0 80% 50%);
+}
+
+/* Book Info Styles */
+.book {
+  font-family: var(--mono);
+  font-size: 1.8rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* TODO: OVERFLOW HIDDEN */
+.description {
+  padding: 2rem 0;
+  text-align: justify;
+  line-height: 2.4rem;
+  text-indent: 2rem;
+}
+
+.book-info {
+  padding: 2rem 4rem;
+  padding-right: 10rem;
+}
+
+.book-info > div {
+  display: flex;
+  gap: 2rem;
+  height: 50vh;
+  font-style: var(--mono);
+}
+
+.metadata {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.metadata > .main {
+  font-family: var(--sans);
+
+  & > h1 {
+    font-size: 5rem;
+  }
+  font-size: 2rem;
+}
+
+.metadata > .misc {
+  display: flex;
+  gap: 4rem;
+  font-weight: 600;
+  color: var(--text-labels);
+  & > * {
+    --bgcl: hsl(from var(--primary) h calc(s * 1.2) calc(l * 0.8));
+    padding: 0.6rem 1.4rem;
+    border-radius: 0.6rem;
+    background-color: var(--bgcl);
+    display: flex;
+    gap: 0.4rem;
+    place-items: center;
+  }
+}
+
+.metadata > .misc > a {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    --bgcl-hover: hsl(from var(--bgcl) h s calc(l * 0.7));
+    background-color: var(--bgcl-hover);
+  }
+}
+
+.release-date {
+  background-color: var(--third);
 }
