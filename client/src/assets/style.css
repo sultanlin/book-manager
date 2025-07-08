@@ -335,6 +335,116 @@ header.header {
 }
 
 /* Book Info Styles */
+.book-shelves {
+  --bkgr-bar: hsl(from var(--primary) h calc(s * 0.7) calc(l * 0.7));
+  padding: 1rem;
+  padding-left: 3rem;
+  background-color: var(--bkgr-bar);
+  display: flex;
+  gap: 2rem;
+}
+
+.book-shelves > button {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  font-size: 1.6rem;
+  font-family: var(--mono);
+  color: var(--text);
+
+  & > .icon {
+    font-size: 3rem;
+  }
+}
+
+.modal > form {
+  margin: 0;
+  padding: 0;
+  background-color: none;
+  font-family: var(--mono);
+  color: var(--text);
+}
+
+.modal > form > fieldset {
+  margin: 0;
+  padding: 1rem 0 2rem;
+  border: none;
+
+  & > legend {
+    font-weight: bold;
+  }
+}
+
+/* TODO: Sort out button's style and move it right */
+.modal > form > button {
+  display: block;
+  margin-left: auto;
+  padding: 0.6rem 2rem;
+  background-color: var(--bgcl-hover);
+  font-family: var(--mono);
+  color: var(--text);
+  font-weight: bold;
+  border: 2px solid var(--primary);
+
+  --btn: hsl(from var(--primary) h calc(s * 0.7) calc(l * 0.7));
+  background-color: var(--bkgr-bar);
+  &:hover {
+    --btn: hsl(from var(--primary) h calc(s * 0.8) calc(l * 0.6));
+    background-color: var(--btn);
+  }
+}
+
+.checkboxes {
+  display: flex;
+  gap: 1rem;
+  padding: 0.3rem 3rem;
+  font-family: var(--mono);
+  font-size: 1.8rem;
+  color: var(--text);
+
+  &:hover {
+    color: var(--text-labels);
+  }
+}
+
+/* TODO: Add enabled class */
+input[type="checkbox"] {
+  accent-color: var(--third);
+  transform: scale(1.4);
+  &:enabled {
+    cursor: pointer;
+  }
+  &:not(:checked) {
+    opacity: 0.8;
+  }
+}
+
+.book-shelves > dialog {
+  padding: 0;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+
+  &::backdrop {
+    background-color: hsl(0, 0%, 0%, 0.4);
+  }
+}
+
+.modal {
+  --bkgr: hsl(from var(--primary) h calc(s * 0.8) calc(l * 0.8));
+  display: flex;
+  align-items: start;
+  background: inherit;
+  background-color: var(--bkgr);
+  padding: 4rem 6rem;
+}
+
 .book {
   font-family: var(--mono);
   font-size: 1.8rem;
@@ -409,3 +519,21 @@ header.header {
 .release-date {
   background-color: var(--third);
 }
+
+button.close {
+  background: inherit;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  color: var(--third);
+  &:hover {
+    color: var(--primary);
+    border-radius: 10rem;
+  }
+
+  & > .icon {
+    font-size: 2rem;
+  }
+}
+
+/* TODO: Make form label fill entire div */

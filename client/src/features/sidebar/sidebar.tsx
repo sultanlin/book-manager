@@ -1,4 +1,4 @@
-import ShelfList from "@/features/shelf"
+import { ShelfList } from "@/features/shelf"
 
 function Sidebar() {
   // TODO: Add a burger to minimize navbar, like in youtube

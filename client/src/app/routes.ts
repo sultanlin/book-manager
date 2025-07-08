@@ -9,5 +9,6 @@ export default [
   layout("./routes/layouts/content-layout.tsx", [
     route("search", "./routes/search.tsx"),
     route("shelves/:shelfId", "./routes/shelves.tsx"),
+    route("books/:bookId", "./routes/books.tsx"),
   ]),
 ] satisfies RouteConfig

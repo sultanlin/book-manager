@@ -1,4 +1,4 @@
-import BookList from "@/features/books"
+import { BookList } from "@/features/books"
 import { useShelfBooks } from "@/features/shelf"
 
 type ShelvesProps = {
