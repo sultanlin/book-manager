@@ -1,6 +1,6 @@
 import { BookInfo } from "@/features/books"
 import { useBook } from "@/features/books"
-import { ShelfDialog } from "@/features/shelf"
+import { ShelfBookModify } from "@/features/shelf"
 import { Book } from "@/types/api"
 import { Add, Delete } from "@mui/icons-material"
 import { Link, useLocation, useSearchParams } from "react-router"
@@ -34,14 +34,14 @@ function Books({ params }: BooksProps) {
   return (
     <div className="book">
       <section className="book-shelves">
-        <ShelfDialog type="add" book={book}>
+        <ShelfBookModify book={book} type={"add"}>
           <Add className="icon" />
-          <p>add to shelf</p>
-        </ShelfDialog>
-        <ShelfDialog type="remove" book={book}>
+          <p>Add to shelf</p>
+        </ShelfBookModify>
+        <ShelfBookModify book={book} type={"delete"}>
           <Delete className="icon" />
-          <p>remove from shelf</p>
-        </ShelfDialog>
+          <p>Delete from shelf</p>
+        </ShelfBookModify>
       </section>
       <BookInfo book={book} />
     </div>
