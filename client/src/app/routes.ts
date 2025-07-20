@@ -10,5 +10,6 @@ export default [
     route("search", "./routes/search.tsx"),
     route("shelves/:shelfId", "./routes/shelves.tsx"),
     route("books/:bookId", "./routes/books.tsx"),
+    route("settings/shelves", "./routes/shelves-settings.tsx"),
   ]),
 ] satisfies RouteConfig

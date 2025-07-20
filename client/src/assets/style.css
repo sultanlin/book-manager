@@ -540,4 +540,121 @@ button.close {
   }
 }
 
-/* TODO: Make form label fill entire div */
+.settings {
+  color: var(--text);
+  padding: 0.6rem 2rem;
+
+  & > div > p {
+    color: var(--text);
+    font-size: 1.8rem;
+  }
+}
+
+.settings > h1 {
+  font-size: 4rem;
+}
+
+.settings > .intro {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.delete > button,
+.rename > button,
+.add > button {
+  --bkgr: hsl(from var(--primary) calc(h) calc(s * 0.9) calc(l * 0.8));
+  --bkgr-hover: hsl(from var(--primary) calc(h) calc(s * 0.9) calc(l * 0.7));
+  background-color: var(--bkgr);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.4rem 2rem;
+  line-height: 1.2;
+  & > .icon {
+    color: var(--text-labels);
+    font-size: 2.4rem;
+    padding: 0;
+    margin: 0;
+  }
+  & > p {
+    color: var(--text);
+    font-size: 1.6rem;
+  }
+  &:hover {
+    background-color: var(--bkgr-hover);
+  }
+}
+
+.add {
+  margin: 2rem 0;
+  display: flex;
+  place-items: center;
+  gap: 2rem;
+}
+
+.add > button {
+  padding: 0.6rem 5rem;
+}
+
+.shelf-option {
+  display: flex;
+  place-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+}
+
+.shelf-option > .name {
+  flex-basis: 26ch;
+  font-size: 3rem;
+}
+
+.shelf-create > fieldset > legend,
+.shelf-rename > fieldset > legend,
+.shelf-delete > fieldset > legend {
+  & > h2 {
+    font-size: 2.8rem;
+  }
+  & > p {
+    font-size: 1.8rem;
+  }
+}
+
+.shelf-create > fieldset > div,
+.shelf-rename > fieldset > div {
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  gap: 0.4rem;
+
+  & > input[type="text"] {
+    background-color: var(--third);
+    border-radius: 0.4rem;
+    border: 1px solid var(--border);
+  }
+}
+
+.shelf-delete > fieldset > div {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  font-size: 1.8rem;
+  & > label {
+    flex: 1;
+  }
+}
+
+/* Pending/Errors styles */
+
+.modal > .pending {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text);
+
+  & > .icon {
+    color: var(--text);
+    font-size: 4rem;
+  }
+}

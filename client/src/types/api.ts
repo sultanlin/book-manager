@@ -23,6 +23,10 @@ export type Shelf = {
   name: string
 }
 
+export type ShelfAddRequest = {
+  shelfName: string
+}
+
 export type LoginCredentials = {
   username: string
   password: string
