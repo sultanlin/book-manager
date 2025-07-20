@@ -71,19 +71,21 @@ function ShelfBookModify({ children, book, type }: Props) {
     return ""
   }
 
-  const [formState, action, isPendingForm] = useActionState(formAction, "")
+  const [formState, action] = useActionState(formAction, "")
 
   const allShelvesQuery = useShelves()
   const bookShelvesQuery = useBookShelves(book.id)
 
-  if (allShelvesQuery.error) return <p>Cannot get your shelves, please retry</p>
+  if (allShelvesQuery.error) return <p className="error">Uh oh, error...</p>
 
   if (allShelvesQuery.isPending || bookShelvesQuery.isPending) {
     return (
-      <p>
-        <Loop className="icon" />
-        Fetching shelf
-      </p>
+      <div>
+        <button className="trigger pending" disabled={true}>
+          <Loop className="icon" />
+          <p>Fetching shelf</p>
+        </button>
+      </div>
     )
   }
 
@@ -140,7 +142,10 @@ function ShelfBookModify({ children, book, type }: Props) {
               )
             })}
           </fieldset>
-          <button type="submit" disabled={isPendingForm}>
+          <button
+            type="submit"
+            disabled={addMutation.isPending || deleteBookFromShelf.isPending}
+          >
             {type === "add" ? "Add" : "Delete"}
           </button>
         </form>

@@ -21,15 +21,19 @@ function Books({ params }: BooksProps) {
 
   const book = data ? data : bookFromParent
 
-  if (!book && isPending) return "Retrieving book, please wait a moment..."
+  if (!book && isPending)
+    return <p className="pending">Retrieving book, please wait a moment...</p>
   if (!book && error?.status === 404) {
     return (
-      <p>
-        {bookName} is not in any of your shelves. Please find it again, or
-        <Link to={`/search?search=${bookName}`}> click here.</Link>
-      </p>
+      <div className="error">
+        <p>
+          {bookName} is not in any of your shelves. Please find it again, or
+          <Link to={`/search?search=${bookName}`}> click here.</Link>
+        </p>
+      </div>
     )
-  } else if (!book && error) return "An error has occured: " + error.message
+  } else if (!book && error)
+    return <p className="error">An error has occured: {error.message}</p>
 
   return (
     <div className="book">

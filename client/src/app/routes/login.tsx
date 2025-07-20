@@ -9,7 +9,7 @@ export async function clientAction(actionArgs: ActionFunctionArgs) {
 function Login() {
   return (
     <div className="form">
-      <AuthForm pendingMessage="Logging in...">
+      <AuthForm>
         <TextInput field="username" placeholder="ie. adminuser" />
         <TextInput
           field="password"

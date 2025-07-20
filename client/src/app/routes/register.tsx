@@ -9,7 +9,7 @@ export async function clientAction(actionArgs: ActionFunctionArgs) {
 function Register() {
   return (
     <div>
-      <AuthForm pendingMessage="Creating account...">
+      <AuthForm>
         <TextInput field="username" placeholder="ie. adminuser" />
         <TextInput
           field="password"

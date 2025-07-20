@@ -6,12 +6,12 @@ function Search() {
   const [searchParams] = useSearchParams()
   const bookName = searchParams.get("search") || ""
 
-  const { data, isLoading, isFetching, isPending, error } = useSearch(bookName)
+  const { data, isPending, error } = useSearch(bookName)
 
-  if (isLoading) return "Getting books, please wait a moment..." // what is isLoading?!?!?
-  if (error) return "An error has occured: " + error.message
-  if (isPending) return "Loading..."
-  if (isFetching) return "Updating..."
+  if (isPending)
+    return <p className="pending">Getting books, please wait a moment...</p>
+  if (error)
+    return <p className="error">An error has occured: {error.message}</p>
 
   return <BookList booksList={data} />
 }

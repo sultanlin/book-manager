@@ -658,3 +658,30 @@ button.close {
     font-size: 4rem;
   }
 }
+
+.pending,
+.error {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  font-size: 4rem;
+}
+
+.form .error {
+  font-size: 2rem;
+}
+
+.book-shelves > .pending {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  font-size: 1.8rem;
+
+  & > .icon {
+    font-size: 3rem;
+  }
+}
+
+.trigger.pending {
+  cursor: wait;
+}

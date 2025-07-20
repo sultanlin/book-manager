@@ -15,21 +15,12 @@ type actionError = {
   error: string
 }
 
-function AuthForm({
-  children,
-  pendingMessage = "Logging in...",
-}: AuthFormProps) {
+function AuthForm({ children }: AuthFormProps) {
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get("redirectTo")
   const data = useActionData() as actionError
 
-  const navigation = useNavigation()
-  const isPending = navigation.state === "submitting"
-  // TODO: Move pending to button only (set all inputs and button to grey)
-
-  return isPending ? (
-    <p>{pendingMessage}</p>
-  ) : (
+  return (
     <Form method="post">
       {data?.error && <p className="error">* {data.error} *</p>}
       {children}

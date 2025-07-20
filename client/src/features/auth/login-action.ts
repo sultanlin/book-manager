@@ -28,7 +28,10 @@ export default async function loginAction({ request }: ActionFunctionArgs) {
     return redirect(redirectTo)
   } catch (err) {
     if (err instanceof AxiosError) {
-      return { error: "Invalid username or password" }
+      if (err.status === 401) {
+        return { error: "Invalid username or password" }
+      }
+      return { error: err.message }
     }
     return { error: "Unexpected error has occured" }
   }
