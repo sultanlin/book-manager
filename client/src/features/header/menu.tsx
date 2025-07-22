@@ -7,9 +7,9 @@ function Menu() {
     <nav>
       <ul className="menu">
         <li className="item">
-          <Link to={"settings"}>
+          <Link to={"settings/shelves"}>
             <Settings />
-            Settings
+            Shelf Settings
           </Link>
         </li>
         <li className="item">
