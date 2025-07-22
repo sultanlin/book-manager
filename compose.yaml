@@ -22,7 +22,7 @@ services:
 
   frontend:
     image: "book-manager-frontend:latest"
-    user: ${CURRENT_UID}
+    user: 1000:1000 # Remove if you don't understand
     build:
       context: ./client/.
     container_name: frontend
@@ -36,7 +36,7 @@ services:
 
   db:
     image: postgres:17-bookworm
-    user: ${CURRENT_UID}
+    user: 1000:1000 # Remove if you don't understand
     container_name: db
     environment:
       - POSTGRES_USER=$POSTGRES_USER
