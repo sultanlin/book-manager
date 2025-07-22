@@ -10,6 +10,15 @@ function ShelfList() {
   if (isPending)
     return <p className="pending">Getting shelves, please wait a moment...</p>
 
+  if (data.length === 0) {
+    return (
+      <p className="pending">
+        You have no shelf, go to the settings page in the top right to add
+        shelves.
+      </p>
+    )
+  }
+
   return (
     <ul className="shelves">
       {data?.map((shelf) => (

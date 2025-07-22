@@ -15,8 +15,8 @@ function ShelvesSettings() {
     <div className="settings">
       <h1>Shelf Settings</h1>
       <p className="intro">
-        You can manage your shelves here by adding a new shelf and renaming or
-        deleting existing shelves.
+        You can manage your shelves here by adding a new shelf and
+        renaming/deleting existing shelves.
       </p>
       <ShelfCreate isMaxShelves={data.length >= 8} />
       {data.map((shelf) => (

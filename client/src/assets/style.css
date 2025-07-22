@@ -665,6 +665,7 @@ button.close {
   height: 100%;
   place-items: center;
   font-size: 4rem;
+  color: var(--text);
 }
 
 .form .error {
