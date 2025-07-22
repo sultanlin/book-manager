@@ -14,7 +14,12 @@ function Shelves({ params }: ShelvesProps) {
     return <p className="error">An error has occured: {error.message}</p>
 
   if (!data.length) {
-    return <p>This shelf has no books yet</p>
+    return (
+      <p className="pending">
+        This shelf has no books yet, you can add books by searching for it and
+        clicking the "add to shelf" book
+      </p>
+    )
   }
 
   return <BookList booksList={data} />
