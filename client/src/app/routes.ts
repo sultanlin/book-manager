@@ -1,12 +1,18 @@
-import { layout, route, type RouteConfig } from "@react-router/dev/routes"
+import {
+  index,
+  layout,
+  route,
+  type RouteConfig,
+} from "@react-router/dev/routes"
 
 export default [
   layout("./routes/layouts/auth-layout.tsx", [
     route("login", "./routes/login.tsx"),
     route("register", "./routes/register.tsx"),
   ]),
-  // TODO: add errorboundary
+  // TODO: Consider catchall/splat
   layout("./routes/layouts/content-layout.tsx", [
+    index("./routes/home.tsx"),
     route("search", "./routes/search.tsx"),
     route("shelves/:shelfId", "./routes/shelves.tsx"),
     route("books/:bookId", "./routes/books.tsx"),
