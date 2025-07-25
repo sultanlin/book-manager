@@ -10,6 +10,8 @@ WORKDIR /app
 # Copy the rest of your application files
 COPY . .
 
+ENV VITE_IP_ADDRESS "localhost"
+
 # Install dependencies
 RUN npm install
 
