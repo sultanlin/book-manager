@@ -1,8 +1,11 @@
 import { useUserStore } from "@/stores/store"
 import Axios from "axios"
 
+const baseUrl =
+  `${window.location.protocol}//${window.location.hostname}` + ":8080"
+
 export const axiosInstance = Axios.create({
-  baseURL: "http://192.168.1.44:8080",
+  baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
@@ -19,5 +22,5 @@ axiosInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error)
-  },
+  }
 )
