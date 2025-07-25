@@ -686,3 +686,23 @@ button.close {
 .trigger.pending {
   cursor: wait;
 }
+
+div.boundary {
+  /* flex flex-col justify-center items-center w-screen h-screen text-red-500 */
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  color: hsl(0 80% 50%);
+}
+
+div.boundary > h2 {
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+div.boundary > button {
+  margin-top: 2rem;
+}
