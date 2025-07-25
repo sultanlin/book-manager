@@ -12,7 +12,7 @@ public class GraphQLClientConfig {
     public HttpSyncGraphQlClient graphQlClient() {
         var restClient = RestClient.create("https://api.hardcover.app/v1/graphql");
         return HttpSyncGraphQlClient.builder(restClient)
-                .headers((headers) -> headers.add("authorization", System.getenv("authorization")))
+                .headers((headers) -> headers.add("authorization", System.getenv("AUTHORIZATION")))
                 .build();
     }
 }
