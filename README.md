@@ -1,5 +1,5 @@
 # Library
-A simple app to track and manage my books.
+A simple app to track and manage your books. Track your book reading how you please by creating shelves and adding books to shelves. For example, a borrow shelf to remember which books you need to return.
 
 ## Features
 
