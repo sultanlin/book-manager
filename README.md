@@ -61,9 +61,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - PGDATA=/var/lib/postgresql/data/pgdata # Leave it alone
-    volumes:
+    # volumes:
       # persist database
-      # - /persist/database/path:/var/lib/postgresql/data
+      # - /database/path/here:/var/lib/postgresql/data
     ports:
       - 5432:5432
     restart: unless-stopped
@@ -78,6 +78,10 @@ services:
 | ------------- |:-------------:|
 | **POSTGRES_USER**      | Your database's username. |
 | **POSTGRES_PASSWORD**      | Your database's password. |
+
+| Volume  | explanation |
+| ------------- |:-------------:|
+| /database/path/here  | Path to persist/save your database outside of docker (ex. ./database) |
 
 **library_server**
 
