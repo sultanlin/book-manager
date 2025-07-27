@@ -1,6 +1,6 @@
 services:
   backend:
-    image: "book-manager-backend:latest"
+    image: "library-backend:beta"
     build:
       context: ./server/.
     container_name: backend
@@ -9,9 +9,7 @@ services:
     depends_on:
       - db
     environment:
-      - authorization=${authorization}
-      - UID=1000
-      - GID=1000
+      - AUTHORIZATION=${AUTHORIZATION}
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - POSTGRES_HOST=$POSTGRES_HOST
@@ -21,13 +19,12 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: "book-manager-frontend:latest"
-    user: 1000:1000 # Remove if you don't understand
+    image: "library-frontend:beta"
     build:
       context: ./client/.
     container_name: frontend
     ports:
-      - 8000:8080 # Maps port 8080 in the container to port 18080 on the host.
+      - 8000:8080 # Maps port 8080 in the container to port 8000 on the host.
     volumes:
       - ${base_dir}/client:/app
     depends_on:
@@ -41,9 +38,10 @@ services:
     environment:
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - PGDATA=/var/lib/postgresql/data/pgdata
+      - PGDATA=/var/lib/postgresql/data/pgdata # Leave it alone
     volumes:
       - ${base_dir}/db:/var/lib/postgresql/data
+      # - /persist/volume/path:/var/lib/postgresql/data
     ports:
       - 5432:5432 # Maps port 8080 in the container to port 18080 on the host.
     restart: unless-stopped
