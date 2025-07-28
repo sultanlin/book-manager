@@ -26,8 +26,13 @@ A simple app to track and manage your books. Track your book reading how you ple
 
 
 ### Docker Installation
-The app can only be installed using docker currently
+The app can only be installed using docker currently.
+1. Add 2 files in the same folder: compose.yaml and .env.
+2. Copy the compose.yaml below and only consider changing optional volume for the database.
+3. Copy the .env file and enter valid values.
+4. Access the app at http://localhost:18000 (or change port according to client's port).
 
+*compose.yaml*
 ```
 services:
   library_server:
@@ -35,10 +40,10 @@ services:
     container_name: library_server
     environment:
       - AUTHORIZATION=$AUTHORIZATION # hardcover api
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_HOST=
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_HOST=$POSTGRES_HOST
+      - POSTGRES_DB=$POSTGRES_DB
     ports:
       - 8080:8080 # Maps port 8080 in the container to port 18080 on the host.
     depends_on:
@@ -58,17 +63,29 @@ services:
     image: postgres:17-bookworm
     container_name: db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - PGDATA=/var/lib/postgresql/data/pgdata # Leave it alone
     # volumes:
-      # persist database
-      # - /database/path/here:/var/lib/postgresql/data
+      # Optional: Persist database
+      # Docker owns the database, if you stop docker, the data (users and shelves) will be gone
+      # To persist database, save the volume in a path. Ex:
+      # - ./database:/var/lib/postgresql/data
     ports:
       - 5432:5432
     restart: unless-stopped
 ```
 
+*.env*
+```
+# Hardcover API token
+AUTHORIZATION=Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+POSTGRES_HOST=192.168.1.1:5432 # Postgres server IP address and port number
+POSTGRES_DB=postgres # Any DB name
+POSTGRES_USER=postgres # Any username
+POSTGRES_PASSWORD=password # Any password
+```
 
 #### Environment variables
 
