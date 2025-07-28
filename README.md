@@ -28,6 +28,7 @@ A simple app to track and manage your books. Track your book reading how you ple
 ### Docker Installation
 The app can only be installed using docker currently
 
+*compose.yaml*
 ```
 services:
   library_server:
@@ -58,17 +59,29 @@ services:
     image: postgres:17-bookworm
     container_name: db
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - PGDATA=/var/lib/postgresql/data/pgdata # Leave it alone
     # volumes:
-      # persist database
-      # - /database/path/here:/var/lib/postgresql/data
+      # Optional: Persist database
+      # Docker owns the database, if you stop docker, the data (users and shelves) will be gone
+      # To persist database, save the volume in a path. Ex:
+      # - ./database:/var/lib/postgresql/data
     ports:
       - 5432:5432
     restart: unless-stopped
 ```
 
+*.env*
+```
+# Hardcover API token
+AUTHORIZATION=Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+POSTGRES_HOST=192.168.1.1:5432 # Postgres server IP address and port number
+POSTGRES_DB=postgres # Any DB name
+POSTGRES_USER=postgres # Any username
+POSTGRES_PASSWORD=password # Any password
+```
 
 #### Environment variables
 
