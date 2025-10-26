@@ -1,13 +1,13 @@
 {
   description = "A Nix-flake-based Node.js and Java development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
   outputs = {
     self,
     nixpkgs,
   }: let
-    javaVersion = 21; # Change this value to update the whole stack
+    javaVersion = 25; # Change this value to update the whole stack
 
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     forEachSupportedSystem = f:
@@ -42,6 +42,7 @@
           ncurses
           patchelf
           zlib
+          graalvm-ce
 
           # Node
           node2nix
@@ -55,6 +56,7 @@
           prev = "\${JAVA_TOOL_OPTIONS:+ $JAVA_TOOL_OPTIONS}";
         in ''
           export JAVA_TOOL_OPTIONS="${loadLombok}${prev}"
+          export GRAALVM_HOME="${pkgs.graalvm-ce}"
         '';
       };
     });
