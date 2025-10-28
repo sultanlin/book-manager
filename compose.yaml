@@ -6,16 +6,12 @@ services:
     container_name: backend
     ports:
       - 8080:8080 # Maps port 8080 in the container to port 18080 on the host.
-    depends_on:
-      - db
     environment:
       - AUTHORIZATION=${AUTHORIZATION}
-      - POSTGRES_USER=$POSTGRES_USER
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - POSTGRES_HOST=$POSTGRES_HOST
-      - POSTGRES_DB=$POSTGRES_DB
     volumes:
       - ${base_dir}/server:/home/backend/app
+      # To persist/save the database
+      # - ${base_dir}/mytempconfig:/config
     restart: unless-stopped
 
   frontend:
@@ -29,19 +25,4 @@ services:
       - ${base_dir}/client:/app
     depends_on:
       - backend
-    restart: unless-stopped
-
-  db:
-    image: postgres:17-bookworm
-    user: 1000:1000 # Remove if you don't understand
-    container_name: db
-    environment:
-      - POSTGRES_USER=$POSTGRES_USER
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - PGDATA=/var/lib/postgresql/data/pgdata # Leave it alone
-    volumes:
-      - ${base_dir}/db:/var/lib/postgresql/data
-      # - /persist/volume/path:/var/lib/postgresql/data
-    ports:
-      - 5432:5432 # Maps port 8080 in the container to port 18080 on the host.
     restart: unless-stopped
