@@ -10,8 +10,7 @@ services:
       - AUTHORIZATION=${AUTHORIZATION}
     volumes:
       - ${base_dir}/server:/home/backend/app
-      # To persist/save the database
-      # - ${base_dir}/mytempconfig:/config
+      - ${base_dir}/mytempconfig:/config # To persist/save the database
     restart: unless-stopped
 
   frontend:
