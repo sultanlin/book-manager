@@ -3,7 +3,7 @@ package com.sultanlinjawi.library.controllers;
 import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.dto.ShelfAddRequest;
 import com.sultanlinjawi.library.dto.ShelfDto;
-import com.sultanlinjawi.library.security.UserDetailsImpl;
+import com.sultanlinjawi.library.security.SecurityUserDetails;
 import com.sultanlinjawi.library.services.ShelfService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class ShelfController {
 
     @GetMapping
     public ResponseEntity<List<ShelfDto>> getShelves(
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return ResponseEntity.ok(shelfService.getShelves(userId));
     }
@@ -38,14 +38,14 @@ public class ShelfController {
     @PostMapping
     public ResponseEntity<ShelfDto> createShelf(
             @RequestBody ShelfAddRequest shelfAddRequest,
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return ResponseEntity.ok(shelfService.createShelf(shelfAddRequest.getShelfName(), userId));
     }
 
     @DeleteMapping("/{shelfId}")
     public ResponseEntity<Void> deleteShelf(
-            @PathVariable int shelfId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @PathVariable int shelfId, @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         shelfService.deleteShelf(shelfId, userId);
         return ResponseEntity.noContent().build();
@@ -55,7 +55,7 @@ public class ShelfController {
     public ResponseEntity<ShelfDto> updateShelf(
             @PathVariable int shelfId,
             @RequestBody ShelfAddRequest shelfAddRequest,
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return ResponseEntity.ok(
                 shelfService.updateShelf(shelfId, shelfAddRequest.getShelfName(), userId));
@@ -63,7 +63,7 @@ public class ShelfController {
 
     @GetMapping("/{shelfId}/books")
     public ResponseEntity<List<BookDto>> getBooksFromShelf(
-            @PathVariable int shelfId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @PathVariable int shelfId, @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return ResponseEntity.ok(shelfService.getBooksFromShelf(shelfId, userId));
     }
@@ -72,7 +72,7 @@ public class ShelfController {
     public ResponseEntity<List<BookDto>> addBookToShelf(
             @PathVariable int shelfId,
             @RequestBody BookDto bookDto,
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return new ResponseEntity<>(
                 shelfService.addBookToShelf(shelfId, bookDto, userId), HttpStatus.CREATED);
@@ -82,7 +82,7 @@ public class ShelfController {
     public ResponseEntity<List<BookDto>> removeBookFromShelf(
             @PathVariable int shelfId,
             @PathVariable int bookId,
-            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return ResponseEntity.ok(shelfService.removeBookFromShelf(shelfId, bookId, userId));
     }

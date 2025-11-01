@@ -1,5 +1,7 @@
 package com.sultanlinjawi.library.security;
 
+import com.sultanlinjawi.library.models.User;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -7,14 +9,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.sultanlinjawi.library.models.User;
-
 import java.util.Collection;
 import java.util.Collections;
 
 @Getter
 @RequiredArgsConstructor
-public class UserDetailsImpl implements UserDetails {
+public class SecurityUserDetails implements UserDetails {
 
     private final User user;
 

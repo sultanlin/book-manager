@@ -2,7 +2,7 @@ package com.sultanlinjawi.library.controllers;
 
 import com.sultanlinjawi.library.dto.BookDto;
 import com.sultanlinjawi.library.dto.ShelfDto;
-import com.sultanlinjawi.library.security.UserDetailsImpl;
+import com.sultanlinjawi.library.security.SecurityUserDetails;
 import com.sultanlinjawi.library.services.BookService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,8 @@ public class BookController {
 
     @GetMapping("/{id}/shelves")
     public ResponseEntity<List<ShelfDto>> getBookShelves(
-            @PathVariable("id") int bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+            @PathVariable("id") int bookId,
+            @AuthenticationPrincipal SecurityUserDetails userDetails) {
         var userId = userDetails.getId();
         return ResponseEntity.ok(bookService.getBookShelves(bookId, userId));
     }
