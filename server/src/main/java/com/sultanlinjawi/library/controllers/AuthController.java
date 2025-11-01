@@ -22,9 +22,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
-        var username = loginRequest.getUsername();
-        var password = loginRequest.getPassword();
-        return ResponseEntity.ok(authService.login(username, password));
+        return ResponseEntity.ok(
+                authService.login(loginRequest.getUsername(), loginRequest.getPassword()));
     }
 
     @PostMapping("/register")
