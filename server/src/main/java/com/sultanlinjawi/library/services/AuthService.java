@@ -41,7 +41,7 @@ public class AuthService {
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(username, password));
         var tokenVal = tokenService.generateToken(authentication);
-        return new AuthResponse(tokenVal, username);
+        return new AuthResponse(username, tokenVal);
     }
 
     private User createUser(String username, String password) {

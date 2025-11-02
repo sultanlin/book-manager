@@ -37,16 +37,17 @@ public class ShelfServiceTests {
     public void ShelfAddedHappyEnding() {
         var userId = 1;
         var shelfName = "Test Shelf";
-        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        String username = "tester 1";
+        var user = User.builder().id(userId).username(username).password("pass").build();
         var shelf = Shelf.builder().name(shelfName).owner(user).build();
         var shelf2 = Shelf.builder().name("different name").owner(user).build();
         user.getShelves().add(shelf2);
 
-        when(userService.getUserById(userId)).thenReturn(user);
+        when(userService.findUserByUsername(username)).thenReturn(user);
         when(shelfRepo.save(Mockito.any())).thenReturn(shelf);
 
         var expected = ShelfDto.from(shelf);
-        var actual = service.createShelf(shelfName, userId);
+        var actual = service.createShelf(shelfName, username);
 
         verify(shelfRepo).save(Mockito.any());
         Assertions.assertThat(actual).isNotNull();
@@ -58,17 +59,18 @@ public class ShelfServiceTests {
     public void ThrowExceptionIfShelfNameIsTakenForUser() {
         var userId = 1;
         var shelfName = "Test Shelf";
-        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        String username = "tester 1";
+        var user = User.builder().id(userId).username(username).password("pass").build();
         var shelf = Shelf.builder().name(shelfName).owner(user).build();
         user.getShelves().add(shelf);
 
-        when(userService.getUserById(userId)).thenReturn(user);
+        when(userService.findUserByUsername(username)).thenReturn(user);
 
         var expected = "Shelf with this name already exists for this user";
         var actual =
                 assertThrows(
                                 IllegalArgumentException.class,
-                                () -> service.createShelf(shelfName, userId))
+                                () -> service.createShelf(shelfName, username))
                         .getMessage();
 
         assertEquals(expected, actual);
@@ -78,16 +80,17 @@ public class ShelfServiceTests {
     @DisplayName("Get all shelves, returns all shelves from user (happy ending)")
     public void GetShelvesHappyEnding() {
         var userId = 1;
-        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        String username = "tester 1";
+        var user = User.builder().id(userId).username(username).password("pass").build();
         var shelf = Shelf.builder().name("Test Shelf").owner(user).build();
         var shelf2 = Shelf.builder().name("different name").owner(user).build();
         user.getShelves().add(shelf);
         user.getShelves().add(shelf2);
 
-        when(userService.getUserById(userId)).thenReturn(user);
+        when(userService.findUserByUsername(username)).thenReturn(user);
 
         var expected = List.of(ShelfDto.from(shelf), ShelfDto.from(shelf2));
-        var actual = service.getShelves(userId);
+        var actual = service.getShelves(username);
 
         Assertions.assertThat(actual).isNotNull();
         assertEquals(expected, actual);
@@ -97,12 +100,13 @@ public class ShelfServiceTests {
     @DisplayName("Get all shelves, empty list when user has no shelves")
     public void ReturnEmptyListIfUserHasNoShelves() {
         var userId = 1;
-        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        String username = "tester 1";
+        var user = User.builder().id(userId).username(username).password("pass").build();
 
-        when(userService.getUserById(userId)).thenReturn(user);
+        when(userService.findUserByUsername(username)).thenReturn(user);
 
         var expected = List.of();
-        var actual = service.getShelves(userId);
+        var actual = service.getShelves(username);
 
         Assertions.assertThat(actual).isNotNull();
         assertEquals(expected, actual);
@@ -113,13 +117,14 @@ public class ShelfServiceTests {
     public void GetShelfUtilityHappyEnding() {
         var userId = 1;
         var shelfId = 10;
-        var user = User.builder().id(userId).username("tester 1").password("pass").build();
+        String username = "tester 1";
+        var user = User.builder().id(userId).username(username).password("pass").build();
         var shelf = Shelf.builder().id(shelfId).name("read now").owner(user).build();
 
         when(shelfRepo.findById(shelfId)).thenReturn(Optional.of(shelf));
 
         var expected = shelf;
-        var actual = service.getShelf(shelfId, userId);
+        var actual = service.getShelf(shelfId, username);
 
         Assertions.assertThat(actual).isNotNull();
         assertEquals(expected, actual);
@@ -130,14 +135,17 @@ public class ShelfServiceTests {
     public void ThrowErrorWhenShelfDoesNotBelongToUser() {
         var userId = 1;
         var shelfId = 10;
-        var otherUser = User.builder().id(55).username("tester 1").password("pass").build();
+        String username = "tester 1";
+        var otherUser = User.builder().id(55).username(username).password("pass").build();
         var shelf = Shelf.builder().id(shelfId).name("read now").owner(otherUser).build();
 
         when(shelfRepo.findById(shelfId)).thenReturn(Optional.of(shelf));
 
         var expected = "Shelf does not exist for this user";
         var actual =
-                assertThrows(EntityNotFoundException.class, () -> service.getShelf(shelfId, userId))
+                assertThrows(
+                                EntityNotFoundException.class,
+                                () -> service.getShelf(shelfId, username))
                         .getMessage();
 
         assertEquals(expected, actual);
@@ -146,7 +154,7 @@ public class ShelfServiceTests {
     @Test
     @DisplayName("Get shelf(utility function), throw exception when no shelf exists with this id")
     public void ThrowErrorWhenShelfDoesNotExist() {
-        var userId = 1;
+        var username = "tester";
 
         when(shelfRepo.findById(Mockito.anyInt())).thenReturn(Optional.empty());
 
@@ -155,7 +163,7 @@ public class ShelfServiceTests {
                 assertThrows(
                                 EntityNotFoundException.class,
                                 () -> {
-                                    service.getShelf(Mockito.anyInt(), userId);
+                                    service.getShelf(Mockito.anyInt(), username);
                                 })
                         .getMessage();
 

@@ -54,6 +54,7 @@ public class SecurityUserDetails implements UserDetails {
     }
 
     public int getId() {
+        System.out.println(this.user.getUsername());
         return user.getId();
     }
 }

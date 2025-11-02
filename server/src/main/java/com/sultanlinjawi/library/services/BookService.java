@@ -35,10 +35,10 @@ public class BookService {
         }
     }
 
-    public List<ShelfDto> getBookShelves(int bookId, int userId) {
+    public List<ShelfDto> getBookShelves(int bookId, String username) {
         var book = getBook(bookId);
         return book.getShelves().stream()
-                .filter(shelf -> shelf.getOwner().getId() == userId)
+                .filter(shelf -> shelf.getOwner().getUsername().equals(username))
                 .map(shelf -> ShelfDto.from(shelf))
                 .toList();
     }

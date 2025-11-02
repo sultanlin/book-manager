@@ -25,15 +25,15 @@ public class ShelfService {
     private final BookService bookService;
 
     @Transactional
-    public List<ShelfDto> getShelves(int userId) {
-        var user = userService.getUserById(userId);
+    public List<ShelfDto> getShelves(String username) {
+        var user = userService.findUserByUsername(username);
         var shelves = user.getShelves();
         return shelves.stream().map((shelf) -> ShelfDto.from(shelf)).toList();
     }
 
     @Transactional
-    public ShelfDto createShelf(String shelfName, int userId) {
-        var user = userService.getUserById(userId);
+    public ShelfDto createShelf(String shelfName, String username) {
+        var user = userService.findUserByUsername(username);
         var shelf = Shelf.builder().name(shelfName).owner(user).build();
         var existingShelf =
                 user.getShelves().stream().filter(s -> s.getName().equals(shelfName)).findFirst();
@@ -44,15 +44,15 @@ public class ShelfService {
     }
 
     @Transactional
-    public ShelfDto updateShelf(int shelfId, String shelfName, int userId) {
-        var shelf = getShelf(shelfId, userId);
+    public ShelfDto updateShelf(int shelfId, String shelfName, String username) {
+        var shelf = getShelf(shelfId, username);
         shelf.setName(shelfName);
         return ShelfDto.from(shelfRepo.save(shelf));
     }
 
     @Transactional
-    public void deleteShelf(int shelfId, int userId) {
-        var shelf = getShelf(shelfId, userId);
+    public void deleteShelf(int shelfId, String username) {
+        var shelf = getShelf(shelfId, username);
         shelf.getBooks().stream()
                 .forEach(
                         (book) -> {
@@ -63,16 +63,16 @@ public class ShelfService {
     }
 
     @Transactional
-    public List<BookDto> getBooksFromShelf(int shelfId, int userId) {
-        var shelf = getShelf(shelfId, userId);
+    public List<BookDto> getBooksFromShelf(int shelfId, String username) {
+        var shelf = getShelf(shelfId, username);
         var booksInShelf = shelf.getBooks();
 
         return booksInShelf.stream().map(book -> BookDto.from(book)).toList();
     }
 
     @Transactional
-    public List<BookDto> addBookToShelf(int shelfId, BookDto bookDto, int userId) {
-        var shelf = getShelf(shelfId, userId);
+    public List<BookDto> addBookToShelf(int shelfId, BookDto bookDto, String username) {
+        var shelf = getShelf(shelfId, username);
         var booksInShelf = shelf.getBooks();
         var requestedBook = Book.from(bookDto);
 
@@ -85,8 +85,8 @@ public class ShelfService {
     }
 
     @Transactional
-    public List<BookDto> removeBookFromShelf(int shelfId, int bookId, int userId) {
-        var shelf = getShelf(shelfId, userId);
+    public List<BookDto> removeBookFromShelf(int shelfId, int bookId, String username) {
+        var shelf = getShelf(shelfId, username);
         var bookToDelete = bookService.getBook(bookId);
 
         var bookRemoved = shelf.getBooks().remove(bookToDelete);
@@ -104,12 +104,14 @@ public class ShelfService {
     }
 
     @Transactional
-    public Shelf getShelf(int shelfId, int userId) {
+    public Shelf getShelf(int shelfId, String username) {
         var shelf =
                 shelfRepo
                         .findById(shelfId)
                         .orElseThrow(() -> new EntityNotFoundException("Shelf does not exist"));
-        if (shelf.getOwner().getId() != userId) {
+        System.out.println("shelf owner is: " + shelf.getOwner().getUsername());
+        System.out.println("shelf owner is: " + username);
+        if (!shelf.getOwner().getUsername().equals(username)) {
             throw new EntityNotFoundException("Shelf does not exist for this user");
         }
         return shelf;

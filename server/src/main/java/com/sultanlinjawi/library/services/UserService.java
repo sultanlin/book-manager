@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -17,13 +18,13 @@ public class UserService {
     // TODO: Add update user
     private final UserRepo userRepo;
 
-    public User getUserById(int userId) {
-        return userRepo.findById(userId)
-                .orElseThrow(
-                        () -> new EntityNotFoundException("User not found with id: " + userId));
+    public User findUserByUsername(String username) {
+        return userRepo.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("Username not found"));
     }
 
-    public void deleteUser(int userId) {
-        userRepo.deleteById(userId);
+    @Transactional
+    public void deleteUserByUsername(String username) {
+        userRepo.deleteByUsername(username);
     }
 }
