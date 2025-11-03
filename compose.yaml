@@ -1,8 +1,6 @@
 services:
   backend:
-    image: "library-backend:beta"
-    build:
-      context: ./server/.
+    image: "docker.io/library/library:0.0.1-SNAPSHOT"
     container_name: backend
     ports:
       - 8080:8080 # Maps port 8080 in the container to port 18080 on the host.
