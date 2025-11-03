@@ -133,10 +133,9 @@ public class ShelfServiceTests {
     @Test
     @DisplayName("Get shelf(utility function), throw exception when shelf does not belong to user")
     public void ThrowErrorWhenShelfDoesNotBelongToUser() {
-        var userId = 1;
         var shelfId = 10;
-        String username = "tester 1";
-        var otherUser = User.builder().id(55).username(username).password("pass").build();
+        var username = "sultan";
+        var otherUser = User.builder().id(55).username("tester 1").password("pass").build();
         var shelf = Shelf.builder().id(shelfId).name("read now").owner(otherUser).build();
 
         when(shelfRepo.findById(shelfId)).thenReturn(Optional.of(shelf));
