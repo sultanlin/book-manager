@@ -12,16 +12,3 @@ services:
       - ${base_dir}/server:/home/backend/app
       - ${base_dir}/mytempconfig:/config # To persist/save the database
     restart: unless-stopped
-
-  frontend:
-    image: "library-frontend:beta"
-    build:
-      context: ./client/.
-    container_name: frontend
-    ports:
-      - 8000:8080 # Maps port 8080 in the container to port 8000 on the host.
-    volumes:
-      - ${base_dir}/client:/app
-    depends_on:
-      - backend
-    restart: unless-stopped

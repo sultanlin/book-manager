@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "tsc -b && vite build",
+    "build-router": "react-router build",
     "lint": "eslint .",
     "preview": "vite preview",
     "serve": "vite --port 8080 --host"

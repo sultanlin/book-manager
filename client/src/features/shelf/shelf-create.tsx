@@ -24,7 +24,6 @@ function ShelfCreate({ isMaxShelves }: Props) {
 
   async function formAction(_: string, formData: FormData): Promise<string> {
     const shelfName = formData.get("shelf-add") as string
-    console.log("Shelf name is: " + shelfName)
 
     const shelfAddRequest: ShelfAddRequest = { shelfName: shelfName.trim() }
 

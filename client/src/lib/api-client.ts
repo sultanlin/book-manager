@@ -1,8 +1,7 @@
 import { useUserStore } from "@/stores/store"
 import Axios from "axios"
 
-const baseUrl =
-  `${window.location.protocol}//${window.location.hostname}` + ":8080"
+const baseUrl = window.location.origin
 
 export const axiosInstance = Axios.create({
   baseURL: baseUrl,

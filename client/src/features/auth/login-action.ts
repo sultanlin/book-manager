@@ -17,7 +17,6 @@ export default async function loginAction({ request }: ActionFunctionArgs) {
   const assignUsername = useUserStore.getState().assignUsername
 
   try {
-    console.log("no error so far")
     const user = await login({
       username: username.toLowerCase(),
       password: password,
