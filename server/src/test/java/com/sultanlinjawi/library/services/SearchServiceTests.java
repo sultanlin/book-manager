@@ -3,12 +3,13 @@ package com.sultanlinjawi.library.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import com.sultanlinjawi.library.dto.BookDto;
-import com.sultanlinjawi.library.dto.BookSearch;
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults;
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit;
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument;
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument.BookSearchImage;
+import com.sultanlinjawi.library.book.BookDto;
+import com.sultanlinjawi.library.search.BookSearch;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults.BookSearchHit;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument.BookSearchImage;
+import com.sultanlinjawi.library.search.SearchService;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -5,10 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.sultanlinjawi.library.dto.ShelfDto;
-import com.sultanlinjawi.library.models.Shelf;
-import com.sultanlinjawi.library.models.User;
-import com.sultanlinjawi.library.repos.ShelfRepo;
+import com.sultanlinjawi.library.book.BookService;
+import com.sultanlinjawi.library.shelf.Shelf;
+import com.sultanlinjawi.library.shelf.ShelfDto;
+import com.sultanlinjawi.library.shelf.ShelfRepo;
+import com.sultanlinjawi.library.shelf.ShelfService;
+import com.sultanlinjawi.library.user.User;
+import com.sultanlinjawi.library.user.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
 

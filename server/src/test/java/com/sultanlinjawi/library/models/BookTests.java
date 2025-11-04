@@ -2,9 +2,10 @@ package com.sultanlinjawi.library.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit;
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument;
-import com.sultanlinjawi.library.dto.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument.BookSearchImage;
+import com.sultanlinjawi.library.book.Book;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults.BookSearchHit;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument;
+import com.sultanlinjawi.library.search.BookSearch.BookSearchResults.BookSearchHit.BookSearchDocument.BookSearchImage;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

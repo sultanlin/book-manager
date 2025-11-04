@@ -1,7 +1,7 @@
 package com.sultanlinjawi.library.security;
 
-import com.sultanlinjawi.library.models.User;
-import com.sultanlinjawi.library.repos.UserRepo;
+import com.sultanlinjawi.library.user.User;
+import com.sultanlinjawi.library.user.UserRepo;
 
 import lombok.RequiredArgsConstructor;
 

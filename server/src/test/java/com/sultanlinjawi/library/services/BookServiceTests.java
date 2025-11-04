@@ -3,10 +3,11 @@ package com.sultanlinjawi.library.services;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import com.sultanlinjawi.library.models.Book;
-import com.sultanlinjawi.library.models.Shelf;
-import com.sultanlinjawi.library.models.User;
-import com.sultanlinjawi.library.repos.BookRepo;
+import com.sultanlinjawi.library.book.Book;
+import com.sultanlinjawi.library.book.BookRepo;
+import com.sultanlinjawi.library.book.BookService;
+import com.sultanlinjawi.library.shelf.Shelf;
+import com.sultanlinjawi.library.user.User;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
