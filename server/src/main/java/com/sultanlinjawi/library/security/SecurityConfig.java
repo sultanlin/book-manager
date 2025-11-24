@@ -29,11 +29,14 @@ public class SecurityConfig {
                                         .permitAll()
                                         .requestMatchers("/api/**")
                                         .authenticated()
+                                        .requestMatchers("/h2/**")
+                                        .permitAll()
                                         .anyRequest()
                                         .permitAll())
                 .sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
+                .headers(h -> h.frameOptions(f -> f.sameOrigin()))
                 .build();
     }
 
