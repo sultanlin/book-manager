@@ -82,15 +82,17 @@ public class ShelfServiceTests {
     @Test
     @DisplayName("Get all shelves, returns all shelves from user (happy ending)")
     public void GetShelvesHappyEnding() {
-        var userId = 1;
-        String username = "tester 1";
+        var username = "tester 1";
+        int userId = 1, shelfId1 = 1, shelfId2 = 2;
+
         var user = User.builder().id(userId).username(username).password("pass").build();
-        var shelf = Shelf.builder().name("Test Shelf").owner(user).build();
-        var shelf2 = Shelf.builder().name("different name").owner(user).build();
+        var shelf = Shelf.builder().id(shelfId1).name("Test Shelf").owner(user).build();
+        var shelf2 = Shelf.builder().id(shelfId2).name("different name").owner(user).build();
+
         user.getShelves().add(shelf);
         user.getShelves().add(shelf2);
 
-        when(userService.findUserByUsername(username)).thenReturn(user);
+        when(shelfRepo.findByOwner_Username(username)).thenReturn(List.of(shelf, shelf2));
 
         var expected = List.of(ShelfDto.from(shelf), ShelfDto.from(shelf2));
         var actual = service.getShelves(username);
@@ -102,11 +104,9 @@ public class ShelfServiceTests {
     @Test
     @DisplayName("Get all shelves, empty list when user has no shelves")
     public void ReturnEmptyListIfUserHasNoShelves() {
-        var userId = 1;
         String username = "tester 1";
-        var user = User.builder().id(userId).username(username).password("pass").build();
 
-        when(userService.findUserByUsername(username)).thenReturn(user);
+        when(shelfRepo.findByOwner_Username(username)).thenReturn(List.of());
 
         var expected = List.of();
         var actual = service.getShelves(username);

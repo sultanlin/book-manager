@@ -25,9 +25,9 @@ public class ShelfService {
 
     @Transactional
     public List<ShelfDto> getShelves(String username) {
-        var user = userService.findUserByUsername(username);
-        var shelves = user.getShelves();
-        return shelves.stream().map((shelf) -> ShelfDto.from(shelf)).toList();
+        return shelfRepo.findByOwner_Username(username).stream()
+                .map((shelf) -> ShelfDto.from(shelf))
+                .toList();
     }
 
     @Transactional
@@ -62,11 +62,10 @@ public class ShelfService {
     }
 
     @Transactional
-    public List<BookDto> getBooksFromShelf(int shelfId, String username) {
-        var shelf = getShelf(shelfId, username);
-        var booksInShelf = shelf.getBooks();
-
-        return booksInShelf.stream().map(book -> BookDto.from(book)).toList();
+    public List<BookDto> getBooksInShelf(int shelfId, String username) {
+        return getShelf(shelfId, username).getBooks().stream()
+                .map(book -> BookDto.from(book))
+                .toList();
     }
 
     @Transactional
