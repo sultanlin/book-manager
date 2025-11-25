@@ -89,4 +89,20 @@ public class Book {
                 bookDto.getSlug(),
                 bookDto.getSubtitle());
     }
+
+    public boolean addShelf(Shelf shelf) {
+        return this.shelves.add(shelf);
+    }
+
+    public BookRemoveEnum removeShelf(Shelf shelf) {
+        if (this.shelves.remove(shelf)) {
+            if (this.shelves.isEmpty()) {
+                return BookRemoveEnum.EMPTY;
+            } else {
+                return BookRemoveEnum.REMOVED;
+            }
+        } else {
+            return BookRemoveEnum.NOT_FOUND;
+        }
+    }
 }

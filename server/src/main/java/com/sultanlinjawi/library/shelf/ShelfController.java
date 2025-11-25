@@ -53,9 +53,9 @@ public class ShelfController {
     }
 
     @GetMapping("/{shelfId}/books")
-    public ResponseEntity<List<BookDto>> getBooksFromShelf(
+    public ResponseEntity<List<BookDto>> getBooksInShelf(
             @PathVariable int shelfId, Principal principal) {
-        return ResponseEntity.ok(shelfService.getBooksFromShelf(shelfId, principal.getName()));
+        return ResponseEntity.ok(shelfService.getBooksInShelf(shelfId, principal.getName()));
     }
 
     @PostMapping("/{shelfId}/books")

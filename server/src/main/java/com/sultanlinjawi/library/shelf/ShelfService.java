@@ -34,9 +34,7 @@ public class ShelfService {
     public ShelfDto createShelf(String shelfName, String username) {
         var user = userService.findUserByUsername(username);
         var shelf = Shelf.builder().name(shelfName).owner(user).build();
-        var existingShelf =
-                user.getShelves().stream().filter(s -> s.getName().equals(shelfName)).findFirst();
-        if (existingShelf.isPresent()) {
+        if (user.getShelves().stream().anyMatch(s -> s.getName().equals(shelfName))) {
             throw new IllegalArgumentException("Shelf with this name already exists for this user");
         }
         return ShelfDto.from(shelfRepo.save(shelf));
@@ -52,12 +50,20 @@ public class ShelfService {
     @Transactional
     public void deleteShelf(int shelfId, String username) {
         var shelf = getShelf(shelfId, username);
+
         shelf.getBooks().stream()
                 .forEach(
                         (book) -> {
-                            book.getShelves().remove(shelf);
-                            bookService.cleanup(book);
+                            switch (book.removeShelf(shelf)) {
+                                case EMPTY -> {
+                                    bookService.cleanup(book);
+                                }
+                                case REMOVED ->
+                                        log.debug("DELETE SHELF: removing " + book.getTitle());
+                                case NOT_FOUND -> log.debug("DELETE SHELF: Book not found?!?");
+                            }
                         });
+
         shelfRepo.delete(shelf);
     }
 
@@ -71,34 +77,33 @@ public class ShelfService {
     @Transactional
     public List<BookDto> addBookToShelf(int shelfId, BookDto bookDto, String username) {
         var shelf = getShelf(shelfId, username);
-        var booksInShelf = shelf.getBooks();
         var requestedBook = Book.from(bookDto);
 
         bookService.add(requestedBook);
-
-        booksInShelf.add(requestedBook);
+        shelf.addBook(requestedBook);
         shelfRepo.save(shelf);
 
-        return booksInShelf.stream().map(book -> BookDto.from(book)).toList();
+        return shelf.getBooks().stream().map(book -> BookDto.from(book)).toList();
     }
 
     @Transactional
     public List<BookDto> removeBookFromShelf(int shelfId, int bookId, String username) {
         var shelf = getShelf(shelfId, username);
-        var bookToDelete = bookService.getBook(bookId);
+        var book = bookService.getBook(bookId);
 
-        var bookRemoved = shelf.getBooks().remove(bookToDelete);
-
-        if (!bookRemoved) {
-            throw new EntityNotFoundException("Shelf does not contain this book");
+        switch (book.removeShelf(shelf)) {
+            case EMPTY -> {
+                log.debug("REMOVE BOOK FROM SHELF: Book has no shelf, removing book from DB");
+                bookService.cleanup(book);
+            }
+            case REMOVED -> log.debug("REMOVE BOOK FROM SHELF: Removing book " + book.getTitle());
+            case NOT_FOUND -> throw new EntityNotFoundException("Book not found in shelf.");
         }
 
+        shelf.removeBook(book);
         shelfRepo.save(shelf);
 
-        bookToDelete.getShelves().remove(shelf);
-        bookService.cleanup(bookToDelete);
-
-        return shelf.getBooks().stream().map(book -> BookDto.from(book)).toList();
+        return shelf.getBooks().stream().map(b -> BookDto.from(b)).toList();
     }
 
     @Transactional
@@ -107,8 +112,6 @@ public class ShelfService {
                 shelfRepo
                         .findById(shelfId)
                         .orElseThrow(() -> new EntityNotFoundException("Shelf does not exist"));
-        System.out.println("shelf owner is: " + shelf.getOwner().getUsername());
-        System.out.println("shelf owner is: " + username);
         if (!shelf.getOwner().getUsername().equals(username)) {
             throw new EntityNotFoundException("Shelf does not exist for this user");
         }

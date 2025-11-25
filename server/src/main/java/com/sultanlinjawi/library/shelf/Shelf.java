@@ -50,4 +50,13 @@ public class Shelf {
             joinColumns = @JoinColumn(name = "shelf_id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "book_id", nullable = false))
     private final Set<Book> books = new HashSet<>();
+
+    void addBook(Book book) {
+        this.books.add(book);
+        book.addShelf(this);
+    }
+
+    boolean removeBook(Book book) {
+        return this.books.remove(book);
+    }
 }
